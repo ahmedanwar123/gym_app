@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'category_card.dart';
 import 'start_button.dart';
-import 'app_colors.dart';
 
 class WorkoutCategoriesScreen extends StatelessWidget {
   @override
@@ -11,7 +10,6 @@ class WorkoutCategoriesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Workout Categories'),
-        backgroundColor: AppColors.colorScheme.primary,
       ),
       body: ListView(
         children: [
@@ -19,7 +17,6 @@ class WorkoutCategoriesScreen extends StatelessWidget {
             title: 'Beginner',
             workouts: 101,
             image: Placeholder(
-              color: AppColors.colorScheme.secondaryVariant,
               strokeWidth: 2,
               child: Icon(Icons.fitness_center, size: 40),
             ),
@@ -37,9 +34,7 @@ class WorkoutCategoriesScreen extends StatelessWidget {
             title: 'Advanced',
             workouts: 103,
             image: Placeholder(
-              color: AppColors.colorScheme.secondaryVariant,
               strokeWidth: 2,
-              child: Icon(Icons.sports_martial, size: 40),
             ),
           ),
           SizedBox(height: 20),

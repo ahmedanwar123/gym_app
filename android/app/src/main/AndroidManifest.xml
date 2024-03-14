@@ -1,6 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAl_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAl_STORAGE"/>
+
+
+
     <application
-        android:label="gym_app"
+        android:label="app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

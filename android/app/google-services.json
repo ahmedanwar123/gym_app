@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "441599813619",
+    "project_id": "styleach",
+    "storage_bucket": "styleach.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441599813619:android:0d9c24edb5458ffe93d486",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN4ZEyD85oi4Af5YEdArYqCA-zGVv7l-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
