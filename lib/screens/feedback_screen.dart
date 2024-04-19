@@ -11,13 +11,16 @@ class FeedbackScreen extends StatefulWidget {
 class _FeedbackScreenState extends State<FeedbackScreen> {
   final String imagePath = 'assets/images/Image-1.png';
 
+  // Define a list with three feedback items
   final List<String> exerciseFeedback = [
     'Item A Feedback',
     'Item B Feedback',
     'Item C Feedback'
   ];
-  final List<bool> _isExpanded =
-      List.generate(3, (_) => false); // Track expansion state for each box
+
+  bool _isExpanded1 = false; // Track expansion state for the first box
+  bool _isExpanded2 = false; // Track expansion state for the second box
+  bool _isExpanded3 = false; // Track expansion state for the third box
 
   @override
   Widget build(BuildContext context) {
@@ -26,38 +29,76 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         appBar: AppBar(
           title: const Text('Feedback'),
         ),
-        body: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 2 / 5,
-              width: MediaQuery.of(context).size.width * 19 / 20,
-              child: Center(
-                child: Image.asset(imagePath),
+        body: SingleChildScrollView(
+          // Wrap the Column with SingleChildScrollView
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 2 / 5,
+                width: MediaQuery.of(context).size.width * 19 / 20,
+                child: Center(
+                  child: Image.asset(imagePath),
+                ),
               ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 1 / 2.05,
-              child: Column(
-                children: [
-                  const Text('Exercise Feedback'),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: exerciseFeedback.length,
-                    itemBuilder: (context, index) {
-                      return ExpandableBox(
-                        label: exerciseFeedback[index],
-                        isExpanded: _isExpanded[index],
-                        feedback: exerciseFeedback[index],
-                        onToggle: () => setState(() {
-                          _isExpanded[index] = !_isExpanded[index];
-                        }),
-                      );
-                    },
-                  ),
-                ],
+              SizedBox(
+                height: MediaQuery.of(context).size.height *
+                    1 /
+                    6, // Change the height for the first item
+                child: Column(
+                  children: [
+                    const Text('Exercise Feedback'),
+                    ExpandableBox(
+                      label:
+                          exerciseFeedback[0], // Use the first item in the list
+                      isExpanded: _isExpanded1,
+                      feedback: "Feedback for item A",
+                      onToggle: () => setState(() {
+                        _isExpanded1 = !_isExpanded1;
+                      }),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: MediaQuery.of(context).size.height *
+                    1 /
+                    6, // Change the height for the second item
+                child: Column(
+                  children: [
+                    const Text('Exercise Feedback'),
+                    ExpandableBox(
+                      label: exerciseFeedback[
+                          1], // Use the second item in the list
+                      isExpanded: _isExpanded2,
+                      feedback: "Feedback for item B",
+                      onToggle: () => setState(() {
+                        _isExpanded2 = !_isExpanded2;
+                      }),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height *
+                    1 /
+                    5.5, // Change the height for the third item
+                child: Column(
+                  children: [
+                    const Text('Exercise Feedback'),
+                    ExpandableBox(
+                      label:
+                          exerciseFeedback[2], // Use the third item in the list
+                      isExpanded: _isExpanded3,
+                      feedback: "Feedback for item C",
+                      onToggle: () => setState(() {
+                        _isExpanded3 = !_isExpanded3;
+                      }),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

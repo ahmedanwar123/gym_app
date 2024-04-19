@@ -39,7 +39,7 @@ class _ExpandableBoxState extends State<ExpandableBox> {
           ),
           if (widget.isExpanded)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: Text(
                 widget.feedback, // Display feedback text when expanded
               ),
