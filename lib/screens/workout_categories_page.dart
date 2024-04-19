@@ -1,7 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'BC_Popup.dart';
-import 'LR_Popup.dart';
+import 'BicepCurl_Popup.dart';
+import 'LateralRaise_Popup.dart';
+import 'package:app/shared/theme.dart';
 
 class WorkoutCategories extends StatefulWidget {
   const WorkoutCategories({Key? key}) : super(key: key);
@@ -24,13 +25,13 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
     return Scaffold(
       backgroundColor: Colors.grey[800],
       appBar: AppBar(
-        backgroundColor: Colors.black45,
+        backgroundColor: secondaryColor,
         title: Text(
           'Workout Categories',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: textColor,
             fontSize: 25.0,
             wordSpacing: 2.0,
           ),
@@ -38,13 +39,13 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
         centerTitle: true,
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.black45,
+        color: secondaryColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
               icon: Icon(Icons.home),
-              color: Colors.white,
+              color: textColor,
               onPressed: () {},
             ),
             IconButton(
@@ -86,13 +87,13 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                     ToggleButtons(
                       children: <Widget>[
                         Expanded(
-                          child: Text('    Beginner  ', style: TextStyle(color: Colors.white)),
+                          child: Text('    Beginner  ', style: TextStyle(color: textColor)),
                         ),
                         Expanded(
-                          child: Text('    Intermediate    ', style: TextStyle(color: Colors.white)),
+                          child: Text('    Intermediate    ', style: TextStyle(color: textColor)),
                         ),
                         Expanded(
-                          child: Text('    Advanced   ', style: TextStyle(color: Colors.white)),
+                          child: Text('    Advanced   ', style: TextStyle(color: textColor)),
                         ),
                       ],
                       isSelected: _isSelected,
@@ -101,10 +102,10 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                           _isSelected = List.generate(_isSelected.length, (i) => i == index);
                         });
                       },
-                      fillColor: Color(0xFFFF8F00),
-                      selectedColor: Color(0xFFFF8F00),
+                      fillColor: buttonColor,
+                      selectedColor: buttonColor,
                       borderRadius: BorderRadius.circular(50.0), // Set 0 to remove rounded corners
-                      selectedBorderColor: Color(0xFFFF8F00),
+                      selectedBorderColor: buttonColor,
                       borderColor: Colors.transparent, // Set transparent to hide borders between buttons
                       borderWidth: 0, // Set 0 to hide borders between buttons
                       textStyle: TextStyle(fontWeight: FontWeight.bold),
@@ -124,7 +125,7 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                   workoutCount: '01',
                   selectedIndex: _isSelected.indexOf(true),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => BC_Popup()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => BicepCurl_Popup()));
                   },
                 ),
                 WorkoutCategoryWidget(
@@ -133,7 +134,7 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                   workoutCount: '02',
                   selectedIndex: _isSelected.indexOf(true),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LR_Popup()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LateralRaise_Popup()));
                   },
                 ),
                 WorkoutCategoryWidget(
@@ -206,7 +207,7 @@ class WorkoutCategoryWidget extends StatelessWidget {
                     child: Text(
                       title,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: textColor,
                         fontSize: 23.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -232,7 +233,7 @@ class WorkoutCategoryWidget extends StatelessWidget {
                     child: Text(
                       '| $workoutCount Workouts for ${selectedIndex == 0 ? "Beginner" : selectedIndex == 1 ? "Intermediate" : "Advanced"}',
                       style: TextStyle(
-                        color: Color(0xFFFF8F00),
+                        color: buttonColor,
                         fontSize: 17.0,
                       ),
                     ),

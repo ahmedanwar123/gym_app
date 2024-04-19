@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'workout_categories_page.dart';
-import 'BC_Popup.dart';
+import 'LateralRaise_Popup.dart';
+import 'package:app/shared/theme.dart';
 
-class LR_Popup extends StatelessWidget {
-  const LR_Popup({Key? key}) : super(key: key);
+class BicepCurl_Popup extends StatelessWidget {
+  const BicepCurl_Popup({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onHorizontalDragEnd: (details) {
-        if (details.primaryVelocity! > 0) {
-          // Swiped right, navigate to LR_Popup
+        if (details.primaryVelocity! < 0) {
+
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => BC_Popup()),
+            MaterialPageRoute(builder: (context) => LateralRaise_Popup()),
           );
         }
       },
@@ -41,7 +42,7 @@ class LR_Popup extends StatelessWidget {
                       child: Stack(
                         children: [
                           Image.asset(
-                            'assets/images/LateralRaise.jpg',
+                            'assets/images/WorkoutCategories_BicepsCurl.png',
                             fit: BoxFit.cover,
                             width: double.infinity,
                             height: double.infinity,
@@ -50,9 +51,9 @@ class LR_Popup extends StatelessWidget {
                             bottom: 20.0,
                             left: 20.0,
                             child: Text(
-                              'Lateral Raise',
+                              'Dumbbell Biceps Curl',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: textColor,
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold,
                                 shadows: [
@@ -81,7 +82,7 @@ class LR_Popup extends StatelessWidget {
                             label: Text("Live"),
                             style: ButtonStyle(
                               foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                              backgroundColor: MaterialStateProperty.all<Color>(Colors.amber.shade700),
+                              backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
                               padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 12, horizontal: 98)),
                               shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0),
@@ -96,7 +97,7 @@ class LR_Popup extends StatelessWidget {
                             label: Text("Upload"),
                             style: ButtonStyle(
                               foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                              backgroundColor: MaterialStateProperty.all<Color>(Colors.amber.shade700),
+                              backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
                               padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 12, horizontal: 90)),
                               shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0),
@@ -109,7 +110,7 @@ class LR_Popup extends StatelessWidget {
                             },
                             child: Text("Cancel"),
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                              foregroundColor: MaterialStateProperty.all<Color>(textColor),
                               padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 12, horizontal: 24)),
                               shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),

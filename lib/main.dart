@@ -1,3 +1,4 @@
+import 'package:app/screens/workout_categories_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/home_screen.dart';
 import 'package:app/screens/feedback_screen.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true),
-      home: const FeedbackScreen(), //change this to your page class to test
+      home: const WorkoutCategories(), //change this to your page class to test
     );
   }
 }
