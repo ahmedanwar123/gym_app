@@ -6,7 +6,7 @@ class ExpandableBox extends StatefulWidget {
   final bool isExpanded;
   final VoidCallback onToggle;
   final String feedback;
-  final Color feedbackBackgroundColor;
+  final Color? feedbackBackgroundColor;
 
   const ExpandableBox({
     Key? key,
@@ -14,7 +14,7 @@ class ExpandableBox extends StatefulWidget {
     required this.isExpanded,
     required this.onToggle,
     required this.feedback,
-    required this.feedbackBackgroundColor,
+    this.feedbackBackgroundColor,
   }) : super(key: key);
 
   @override

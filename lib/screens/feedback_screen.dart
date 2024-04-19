@@ -67,7 +67,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     label: exerciseFeedback[0],
                     isExpanded: _isExpanded1,
                     feedback: "",
-                    feedbackBackgroundColor: secondaryColor,
                     onToggle: () => setState(() {
                       _isExpanded1 = !_isExpanded1;
                     }),
@@ -84,7 +83,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     label: exerciseFeedback[1],
                     isExpanded: _isExpanded2,
                     feedback: "Feedback for item B",
-                    feedbackBackgroundColor: secondaryColor,
                     onToggle: () => setState(() {
                       _isExpanded2 = !_isExpanded2;
                     }),
@@ -101,7 +99,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     label: exerciseFeedback[2],
                     isExpanded: _isExpanded3,
                     feedback: "Feedback for item C",
-                    feedbackBackgroundColor: secondaryColor,
                     onToggle: () => setState(() {
                       _isExpanded3 = !_isExpanded3;
                     }),
