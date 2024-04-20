@@ -47,11 +47,10 @@ To get started with PBL App, follow these simple steps:
 ## Usage
 
 1. Launch the app on your device or emulator.
-2. Sign up or log in to your account.
-3. Choose the exercise you want to assess from the available options.
-4. Follow the on-screen instructions to record a video of yourself performing the exercise.
-5. Receive feedback and assessment results based on the uploaded video.
-6. Use the feedback to make adjustments and improve your workout form.
+2. Choose the exercise you want to assess from the available options.
+3. Follow the on-screen instructions to record a video of yourself performing the exercise.
+4. Receive feedback and assessment results based on the uploaded video.
+5. Use the feedback to make adjustments and improve your workout form.
 
 ## Contributing
 
@@ -59,7 +58,7 @@ Contributions are welcome! If you have ideas for improvements, new features, or 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/ahmedanwar123/pbl-app/blob/main/LICENSE) file for details.
+This project is licensed under License - see the [LICENSE](https://github.com/ahmedanwar123/pbl-app/blob/main/LICENSE) file for details.
 
 ## Acknowledgments
 
@@ -67,4 +66,4 @@ Special thanks to the contributors who helped make this project possible.
 
 ## Contact
 
-For any inquiries or feedback, please contact [author_name](mailto:author_email).
+For any inquiries or feedback, please contact [Ahmed Anwar](mailto:ahmed.anwar2003@gmail.com).
