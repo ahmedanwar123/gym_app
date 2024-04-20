@@ -11,8 +11,7 @@ Welcome to PBL App! This project is designed for workout form assessment, utiliz
 - **Workout Form Assessment**: Provides a platform for users to assess their workout forms using computer vision techniques.
 - **Flutter and Dart**: Utilizes Flutter framework and Dart programming language for building the frontend of the application.
 - **Integration with Backend Node.js**: Integrated with a backend Node.js server to handle data storage, processing, and communication.
-- **User Authentication**: Allows users to sign up, log in, and securely access their assessment data.
-- **Exercise Database**: Contains a database of various exercises for assessment, including squats, deadlifts, push-ups, and planks.
+- **Exercise Database**: Contains a database of two exercises for assessment, Dumbpell Biceps, and Lateral Raise.
 
 ## Installation
 
