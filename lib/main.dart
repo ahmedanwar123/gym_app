@@ -1,8 +1,8 @@
+import 'package:app/screens/Splash.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/home_screen.dart';
 import 'package:app/screens/feedback_screen.dart';
 import 'package:app/shared/theme.dart';
-
 void main() async {
   runApp(const MyApp());
 }
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true),
-      home: const FeedbackScreen(), //change this to your page class to test
+      home: Splash(), //change this to your page class to test
     );
   }
 }
