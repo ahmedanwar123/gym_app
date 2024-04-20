@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app/shared/theme.dart';
+
 class Onboarding_2 extends StatelessWidget {
   const Onboarding_2({super.key});
 
@@ -12,13 +13,17 @@ class Onboarding_2 extends StatelessWidget {
           Image.asset(
             'assets/images/Un2.png',
             fit: BoxFit.cover, // Cover the entire screen
-            width: MediaQuery.of(context).size.width, // Set width to screen width
-            height: MediaQuery.of(context).size.height, // Set height to screen height
+            width:
+                MediaQuery.of(context).size.width, // Set width to screen width
+            height: MediaQuery.of(context)
+                .size
+                .height, // Set height to screen height
           ),
           Positioned(
             left: 0,
             right: 0,
-            bottom: MediaQuery.of(context).size.height * 0.2, // Adjust this value to move the text higher
+            bottom: MediaQuery.of(context).size.height *
+                0.2, // Adjust this value to move the text higher
             child: const Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
@@ -32,7 +37,6 @@ class Onboarding_2 extends StatelessWidget {
                         color: textColor,
                         fontSize: 22,
                         fontFamily: 'Roboto',
-                      
                       ),
                       textAlign: TextAlign.center, // Justify the text
                     ),
