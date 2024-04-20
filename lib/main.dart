@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:app/screens/home_screen.dart';
 import 'package:app/screens/feedback_screen.dart';
 import 'package:app/shared/theme.dart';
+import 'package:app/screens/workout_categories_page.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true),
-      home: Splash(), //change this to your page class to test
+      home: WorkoutCategories(), //change this to your page class to test
     );
   }
 }
