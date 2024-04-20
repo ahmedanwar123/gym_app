@@ -1,6 +1,6 @@
 # PBL App
 
-![PBL App](![Group 7](https://github.com/ahmedanwar123/pbl-app/assets/49812918/842e994f-877e-4eae-98c0-ffe00968bab3))
+(![Group 7](https://github.com/ahmedanwar123/pbl-app/assets/49812918/842e994f-877e-4eae-98c0-ffe00968bab3))
 
 ## Introduction
 
