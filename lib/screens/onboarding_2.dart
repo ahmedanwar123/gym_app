@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-
-class Screen_2 extends StatelessWidget {
+import 'package:app/shared/theme.dart';
+class Onboarding_2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 28, 28, 30),
+      backgroundColor: bgColor,
       body: Stack(
         children: [
           Image.asset(
-            'assets/Un2.png',
+            'assets/images/Un2.png',
             fit: BoxFit.cover, // Cover the entire screen
             width: MediaQuery.of(context).size.width, // Set width to screen width
             height: MediaQuery.of(context).size.height, // Set height to screen height
@@ -27,8 +27,10 @@ class Screen_2 extends StatelessWidget {
                     Text(
                       'CREATE A WORKOUT PLAN',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: textColor,
                         fontSize: 22,
+                        fontFamily: 'Roboto',
+                      
                       ),
                       textAlign: TextAlign.center, // Justify the text
                     ),
@@ -36,8 +38,9 @@ class Screen_2 extends StatelessWidget {
                     Text(
                       'TO STAY FIT',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: textColor,
                         fontSize: 22,
+                        fontFamily: 'Roboto',
                         fontWeight: FontWeight.bold, // Make the text bold
                       ),
                       textAlign: TextAlign.center, // Justify the text

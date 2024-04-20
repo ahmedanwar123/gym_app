@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-
-class Screen_3 extends StatelessWidget {
+import 'package:app/shared/theme.dart';
+class Onboarding_3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 28, 28, 30),
+      backgroundColor: bgColor,
       body: Stack(
         children: [
           Image.asset(
-            'assets/Un3.png',
+            'assets/images/Un3.png',
             fit: BoxFit.cover,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -27,8 +27,9 @@ class Screen_3 extends StatelessWidget {
                     const Text(
                       'ACTION IS THE',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: textColor,
                         fontSize: 22,
+                        fontFamily: 'Roboto',
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -36,8 +37,9 @@ class Screen_3 extends StatelessWidget {
                     const Text(
                       'KEY TO ALL SUCCESS',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: textColor,
                         fontSize: 22,
+                        fontFamily: 'Roboto',
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
@@ -48,9 +50,14 @@ class Screen_3 extends StatelessWidget {
                         // Handle button press
                       },
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255,241,153,45)
+                          backgroundColor: buttonColor,
                       ),
-                      child: const Text('Start Now'),
+                      child: const Text('Start Now',
+                      style: TextStyle(
+                        color: textColor,
+                        fontSize: 16,
+                        fontFamily: 'Roboto',
+                      ),),
                     ),
                   ],
                 ),

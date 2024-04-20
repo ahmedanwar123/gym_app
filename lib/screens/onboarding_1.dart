@@ -1,21 +1,23 @@
+import 'package:app/screens/Onboarding_2.dart';
+import 'package:app/screens/Onboarding_3.dart';
 import 'package:flutter/material.dart';
-
+import 'package:app/shared/theme.dart';
  // Import Screen_3
 
-class Screen_1 extends StatelessWidget {
+class Onboarding_1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 28, 28, 30),
+      backgroundColor: bgColor,
       body: PageView(
         scrollDirection: Axis.horizontal,
         children: [
           Scaffold(
-            backgroundColor: const Color.fromARGB(255, 28, 28, 30),
+            backgroundColor: bgColor,
             body: Stack(
               children: [
                 Image.asset(
-                  'assets/Un1.png',
+                  'assets/images/Un1.png',
                   fit: BoxFit.cover, // Cover the entire screen
                   width: MediaQuery.of(context).size.width, // Set width to screen width
                   height: MediaQuery.of(context).size.height, // Set height to screen height
@@ -34,8 +36,9 @@ class Screen_1 extends StatelessWidget {
                           Text(
                             'WITH YOUR AI COACH,',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: textColor,
                               fontSize: 22,
+                              fontFamily: 'Roboto',
                             ),
                             textAlign: TextAlign.center, // Justify the text
                           ),
@@ -43,8 +46,9 @@ class Screen_1 extends StatelessWidget {
                           Text(
                             'START YOUR JOURNEY',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: textColor,
                               fontSize: 22,
+                              fontFamily: 'Roboto',
                               fontWeight: FontWeight.bold, // Make the text bold
                             ),
                             textAlign: TextAlign.center, // Justify the text
@@ -57,8 +61,8 @@ class Screen_1 extends StatelessWidget {
               ],
             ),
           ),
-          Screen_2(), 
-          Screen_3(),
+          Onboarding_2(), 
+          Onboarding_3(),
         ],
       ),
     );

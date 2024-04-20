@@ -1,22 +1,24 @@
+import 'package:app/screens/Onboarding_1.dart';
 import 'package:flutter/material.dart';
-class MyHomePage extends StatelessWidget {
+import 'package:app/shared/theme.dart';
+class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 28, 28, 30),
+      backgroundColor: bgColor,
       body: Center(
         child: GestureDetector(
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Screen_1()),
+              MaterialPageRoute(builder: (context) => Onboarding_1()),
             );
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/Icon Logo.png',
+                'assets/logos/Icon Logo.png',
                 width: 150,
                 height: 150,
               ),
@@ -24,18 +26,20 @@ class MyHomePage extends StatelessWidget {
               const Text(
                 'WORKOUT FORM',
                 style: TextStyle(
-                  color: Color.fromARGB(255,241,153,45),
+                  color:titleColor,
                   fontSize: 26,
-                  fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Roboto',
                 ),
               ),
               const SizedBox (height: 20),
               const Text(
                 'ASSESSMENT',
                 style: TextStyle(
-                  color: Color.fromARGB(255,241,153,45),
+                  color: titleColor,
                   fontSize: 26,
-                  fontWeight: FontWeight.bold
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Roboto',
                 ),
               ),
             ],
