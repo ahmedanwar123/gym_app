@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:app/shared/theme.dart';
+
 class Onboarding_3 extends StatelessWidget {
+  const Onboarding_3({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,19 +48,21 @@ class Onboarding_3 extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
-                    ElevatedButton( 
+                    ElevatedButton(
                       onPressed: () {
                         // Handle button press
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: buttonColor,
+                        backgroundColor: buttonColor,
                       ),
-                      child: const Text('Start Now',
-                      style: TextStyle(
-                        color: textColor,
-                        fontSize: 16,
-                        fontFamily: 'Roboto',
-                      ),),
+                      child: const Text(
+                        'Start Now',
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 16,
+                          fontFamily: 'Roboto',
+                        ),
+                      ),
                     ),
                   ],
                 ),

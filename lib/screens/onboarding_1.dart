@@ -5,6 +5,8 @@ import 'package:app/shared/theme.dart';
 // Import Screen_3
 
 class Onboarding_1 extends StatelessWidget {
+  const Onboarding_1({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
