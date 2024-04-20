@@ -1,6 +1,7 @@
-import 'package:app/screens/Onboarding_1.dart';
+import 'package:app/screens/onboarding_1.dart';
 import 'package:flutter/material.dart';
 import 'package:app/shared/theme.dart';
+
 class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,17 +23,17 @@ class Splash extends StatelessWidget {
                 width: 150,
                 height: 150,
               ),
-              const SizedBox (height: 20),
+              const SizedBox(height: 20),
               const Text(
                 'WORKOUT FORM',
                 style: TextStyle(
-                  color:titleColor,
+                  color: titleColor,
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Roboto',
                 ),
               ),
-              const SizedBox (height: 20),
+              const SizedBox(height: 20),
               const Text(
                 'ASSESSMENT',
                 style: TextStyle(

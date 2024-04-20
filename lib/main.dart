@@ -1,8 +1,9 @@
-import 'package:app/screens/Splash.dart';
+import 'package:app/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:app/screens/home_screen.dart';
 import 'package:app/screens/feedback_screen.dart';
 import 'package:app/shared/theme.dart';
+
 void main() async {
   runApp(const MyApp());
 }
