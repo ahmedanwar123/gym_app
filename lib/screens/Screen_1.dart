@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trial_pbl/Screen_2.dart';
-import 'package:trial_pbl/Screen_3.dart';
+
  // Import Screen_3
 
 class Screen_1 extends StatelessWidget {
