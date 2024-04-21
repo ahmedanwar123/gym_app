@@ -1,3 +1,4 @@
+import 'package:app/screens/workout_categories_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app/shared/theme.dart';
 
@@ -48,22 +49,39 @@ class Onboarding_3 extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Handle button press
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonColor,
-                      ),
-                      child: const Text(
-                        'Start Now',
-                        style: TextStyle(
-                          color: textColor,
-                          fontSize: 16,
-                          fontFamily: 'Roboto',
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.4, // Adjust the percentage as needed
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutCategories()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: buttonColor,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+
+                            SizedBox(width: 8), // Adjust the spacing between the icon and text
+                            Text(
+                              'Start Now',
+                              style: TextStyle(
+                                color: Colors.black, // Set text color to black
+                                fontSize: 16,
+                                fontFamily: 'Roboto',
+                              ),
+                            ),
+                            Icon(
+                              Icons.play_arrow,
+                              color: Colors.black, // Set icon color to black
+                            ),
+                          ],
                         ),
                       ),
-                    ),
+                    )
+
+
+
                   ],
                 ),
               ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'workout_categories_page.dart';
 import 'LateralRaise_Popup.dart';
 import 'package:app/shared/theme.dart';
-import 'temp.dart';
+
 
 class BicepCurl_Popup extends StatelessWidget {
   const BicepCurl_Popup({Key? key}) : super(key: key);
@@ -72,7 +72,7 @@ class BicepCurl_Popup extends StatelessWidget {
                         children: [
                           TextButton.icon(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => temp()));
+
                             },
                             icon: Icon(Icons.play_arrow),
                             label: Text("Live"),
@@ -87,7 +87,7 @@ class BicepCurl_Popup extends StatelessWidget {
                           ),
                           TextButton.icon(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => temp()));
+
                             },
                             icon: Icon(Icons.play_arrow),
                             label: Text("Upload"),
