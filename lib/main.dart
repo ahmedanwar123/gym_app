@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "demo",
+      title: "Workout Form Assessment",
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true),
-      home: Onboarding_1(), //change this to your page class to test
+      home: Splash(), //change this to your page class to test
     );
   }
 }
