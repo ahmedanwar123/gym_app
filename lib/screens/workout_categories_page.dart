@@ -144,6 +144,24 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                     // Add navigation logic for coming soon category
                   },
                 ),
+                WorkoutCategoryWidget(
+                  imagePath: 'assets/images/ComingSoon.jpg',
+                  title: 'Coming Soon',
+                  workoutCount: '04',
+                  selectedIndex: _isSelected.indexOf(true),
+                  onTap: () {
+                    // Add navigation logic for coming soon category
+                  },
+                ),
+                WorkoutCategoryWidget(
+                  imagePath: 'assets/images/ComingSoon.jpg',
+                  title: 'Coming Soon',
+                  workoutCount: '05',
+                  selectedIndex: _isSelected.indexOf(true),
+                  onTap: () {
+                    // Add navigation logic for coming soon category
+                  },
+                ),
                 // Add more categories here if needed
               ],
             ),

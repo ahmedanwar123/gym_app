@@ -5,7 +5,7 @@
 
 
     <application
-        android:label="app"
+        android:label="Workout Form Assessment"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

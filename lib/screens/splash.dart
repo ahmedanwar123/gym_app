@@ -19,7 +19,7 @@ class Splash extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/logos/Icon_Logo.png',
+                'assets/logos/Icon Logo.png',
                 width: 150,
                 height: 150,
               ),
