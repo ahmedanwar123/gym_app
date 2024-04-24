@@ -100,7 +100,7 @@ class LateralRaise_Popup extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutCategories()));
+                              Navigator.pop(context);
                             },
                             child: Text("Cancel"),
                             style: ButtonStyle(
