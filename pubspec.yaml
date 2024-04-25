@@ -32,7 +32,7 @@ dependencies:
     sdk: flutter
   flutter_svg: ^2.0.9
   font_awesome_flutter: ^10.6.0
-  image_picker: ^1.0.5
+
   # Social login packages
   provider: ^6.0.2 
   oauth2: ^2.0.0
@@ -45,6 +45,9 @@ dependencies:
   shared_preferences: ^2.2.2
   equatable: ^2.0.5
   either_dart: ^1.0.0
+  permission_handler: ^10.0.0
+  image_picker: ^1.1.0
+  video_player: ^2.8.6
 
 dev_dependencies:
   flutter_test:
@@ -53,11 +56,12 @@ dev_dependencies:
 
 
 
+
 flutter_icons:
   android: true
   ios: true
   image_path: "assets/logos/Icon Logo.png"
-  adaptive_icon_background: "#000000"
+  adaptive_icon_background: "0xFF1D1C1F"
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
