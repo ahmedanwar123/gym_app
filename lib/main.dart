@@ -1,10 +1,10 @@
-import 'package:app/screens/onboarding_1.dart';
-import 'package:app/screens/splash.dart';
-import 'package:flutter/material.dart';
-import 'package:app/screens/home_screen.dart';
+
+
 import 'package:app/screens/feedback_screen.dart';
-import 'package:app/shared/theme.dart';
+import 'package:app/screens/splash.dart';
 import 'package:app/screens/workout_categories_page.dart';
+import 'package:flutter/material.dart';
+
 
 void main() async {
   runApp(const MyApp());

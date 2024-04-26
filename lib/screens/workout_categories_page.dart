@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'BicepCurl_Popup.dart';
-import 'LateralRaise_Popup.dart';
-import 'package:app/widgets/WorkoutCategory_Widget .dart';
 import 'package:app/shared/theme.dart';
 import 'package:app/widgets/CustomToggleButtons.dart';
+import 'package:app/widgets/WorkoutCategory_Widget .dart';
+import 'ExercisePopup.dart';
 
 class WorkoutCategories extends StatefulWidget {
   const WorkoutCategories({Key? key}) : super(key: key);
@@ -14,6 +13,8 @@ class WorkoutCategories extends StatefulWidget {
 
 class _WorkoutCategoriesState extends State<WorkoutCategories> {
   late List<bool> _isSelected;
+  String WorkoutName = "";
+  String Workoutlevel = "Beginner";
 
   @override
   void initState() {
@@ -79,10 +80,9 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
               alignment: Alignment.center,
               child: Container(
                 alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width  ,
+                width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
-
                 ),
                 child: ToggleButton(
                   width: 360.0,
@@ -98,16 +98,19 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                   onLeftToggleActive: () {
                     setState(() {
                       _isSelected = [true, false, false];
+                      Workoutlevel = "Beginner";
                     });
                   },
                   onMiddleToggleActive: () {
                     setState(() {
                       _isSelected = [false, true, false];
+                      Workoutlevel = "Intermediate";
                     });
                   },
                   onRightToggleActive: () {
                     setState(() {
                       _isSelected = [false, false, true];
+                      Workoutlevel = "Advanced";
                     });
                   },
                 ),
@@ -123,7 +126,16 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                   workoutCount: '01',
                   selectedIndex: _isSelected.indexOf(true),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => BicepCurl_Popup()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ExercisePopup(
+                          imagePath: 'assets/images/WorkoutCategories_BicepsCurl.png',
+                          exerciseName: 'Dumbbell Biceps Curl',
+                        ),
+                      ),
+                    );
+                    WorkoutName = "Dumbbell Biceps Curl";
                   },
                 ),
                 WorkoutCategoryWidget(
@@ -132,7 +144,16 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                   workoutCount: '02',
                   selectedIndex: _isSelected.indexOf(true),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LateralRaise_Popup()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ExercisePopup(
+                          imagePath: 'assets/images/LateralRaise.jpg',
+                          exerciseName: 'Lateral Raise',
+                        ),
+                      ),
+                    );
+                    WorkoutName = "Lateral Raise";
                   },
                 ),
                 WorkoutCategoryWidget(
