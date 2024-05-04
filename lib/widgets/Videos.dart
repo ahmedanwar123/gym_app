@@ -1,7 +1,8 @@
+import 'package:app/screens/Feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:app/screens/feedback_screen.dart';
+
 
 // Function to request camera permission and record a video
 Future<void> recordVideo(BuildContext context) async {
@@ -42,7 +43,7 @@ void _startVideoRecording(BuildContext context) async {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => FeedbackScreen(videoURL: videoFile.path),
+          builder: (context) => Feedbacks(videoURL: videoFile.path),
         ),
       );
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:app/screens/feedback_screen.dart';
+import 'package:app/screens/Feedback.dart';
 import 'package:app/shared/theme.dart';
-import 'package:app/widgets/videos.dart'; // Import videos.dart
+import 'package:app/widgets/videos.dart';
 
 class ExercisePopup extends StatelessWidget {
   final String imagePath;
@@ -99,7 +99,7 @@ class ExercisePopup extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => FeedbackScreen(videoURL: uploadedVideoURL),
+                                    builder: (context) => Feedbacks(videoURL: uploadedVideoURL),
                                   ),
                                 );
                               }

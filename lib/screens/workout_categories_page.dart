@@ -22,6 +22,37 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
     _isSelected = [true, false, false];
   }
 
+  // Method to show the AlertDialog
+  void _showComingSoonAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: bgColor, // Use the same background color as the scaffold
+          title: Text(
+            'Coming Soon',
+            style: TextStyle(color: textColor),
+          ),
+          content: Text(
+            'This workout category will be available soon. Please choose an available workout.',
+            style: TextStyle(color: textColor),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'OK',
+                style: TextStyle(color: textColor),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,7 +193,7 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                   workoutCount: '03',
                   selectedIndex: _isSelected.indexOf(true),
                   onTap: () {
-                    // Add navigation logic for coming soon category
+                    _showComingSoonAlertDialog(context); // Show the AlertDialog
                   },
                 ),
                 WorkoutCategoryWidget(
@@ -171,7 +202,7 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                   workoutCount: '04',
                   selectedIndex: _isSelected.indexOf(true),
                   onTap: () {
-                    // Add navigation logic for coming soon category
+                    _showComingSoonAlertDialog(context); // Show the AlertDialog
                   },
                 ),
                 WorkoutCategoryWidget(
@@ -180,7 +211,7 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                   workoutCount: '05',
                   selectedIndex: _isSelected.indexOf(true),
                   onTap: () {
-                    // Add navigation logic for coming soon category
+                    _showComingSoonAlertDialog(context); // Show the AlertDialog
                   },
                 ),
                 // Add more categories here if needed

@@ -88,6 +88,10 @@ flutter:
     - assets/logos/
     - assets/images/
     - assets/icons/
+    - assets/gifs/
+    - assets/gifs/FormTechnique/
+    - assets/gifs/MotionControl/
+    - assets/gifs/Stability/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
