@@ -17,7 +17,22 @@ class _SplashState extends State<Splash> {
     Timer(Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Onboarding_1()),
+        PageRouteBuilder(
+          transitionDuration: Duration(milliseconds: 1000), // Adjust duration as needed
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.easeInOutQuart;
+
+            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+          pageBuilder: (context, animation, secondaryAnimation) => Onboarding_1(),
+        ),
       );
     });
   }

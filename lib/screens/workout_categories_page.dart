@@ -80,7 +80,7 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
               alignment: Alignment.center,
               child: Container(
                 alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.width * 0.95,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                 ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:app/shared/theme.dart';
 import 'package:app/screens/feedback_screen.dart';
+import 'package:app/shared/theme.dart';
+import 'package:app/widgets/videos.dart'; // Import videos.dart
 
 class ExercisePopup extends StatelessWidget {
   final String imagePath;
@@ -79,7 +79,7 @@ class ExercisePopup extends StatelessWidget {
                         children: [
                           TextButton.icon(
                             onPressed: () {
-                              RecordVideo(context);
+                              recordVideo(context); // Call recordVideo function
                             },
                             icon: Icon(Icons.play_arrow),
                             label: Text("Live"),
@@ -139,56 +139,5 @@ class ExercisePopup extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-Future<XFile?> PickVideo() async {
-  final picker = ImagePicker();
-  try {
-    XFile? videoFile = await picker.pickVideo(source: ImageSource.gallery);
-    return videoFile;
-  } catch (e) {
-    print('Error picking video: $e');
-    return null;
-  }
-}
-
-void RecordVideo(BuildContext context) async {
-  final picker = ImagePicker();
-  try {
-    XFile? videoFile = await picker.pickVideo(source: ImageSource.camera);
-    if (videoFile != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => FeedbackScreen(videoURL: videoFile.path),
-        ),
-      );
-    }
-  } catch (e) {
-    print('Error recording video: $e');
-  }
-}
-
-Future<String?> uploadVideo(BuildContext context) async {
-  final picker = ImagePicker();
-
-  try {
-    // Pick video from gallery
-    XFile? videoFile = await picker.pickVideo(source: ImageSource.gallery);
-
-    if (videoFile != null) {
-      // Perform your upload logic here if needed
-
-      // Return the file path of the selected video
-      return videoFile.path;
-    } else {
-      // No video selected
-      return null;
-    }
-  } catch (e) {
-    // Error occurred during picking/uploading video
-    print('Error uploading video: $e');
-    return null;
   }
 }
