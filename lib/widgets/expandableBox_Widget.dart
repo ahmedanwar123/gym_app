@@ -36,7 +36,7 @@ class _ExpandableBoxState extends State<ExpandableBox> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              backgroundColor: Colors.black,
+              backgroundColor: AltDlgColor,
               title: Text(
                   _showFrontPhoto ? 'Front' : 'Side',
                   style: TextStyle(
@@ -119,7 +119,7 @@ class _ExpandableBoxState extends State<ExpandableBox> {
                 Text(
                   widget.title,
                   style: const TextStyle(
-                    color: Colors.white, // Set text color to white
+                    color: iconColor, // Set text color to white
                     fontSize: 20, // Set font size
                     fontWeight: FontWeight.bold, // Make the text bold
                   ),
@@ -129,12 +129,12 @@ class _ExpandableBoxState extends State<ExpandableBox> {
                     IconButton(
                       icon: Icon(
                         widget.isExpanded ? Icons.expand_less : Icons.expand_more,
-                        color: Colors.white,
+                        color: iconColor,
                       ),
                       onPressed: widget.onToggle,
                     ),
                     IconButton(
-                      icon: Icon(Icons.gif,color: Colors.white,size: 35,), // Change to the desired icon
+                      icon: Icon(Icons.gif,color: iconColor,size: 35,), // Change to the desired icon
                       onPressed: _showGifDialog, // Call the method to show the AlertDialog
                     ),
                   ],
@@ -153,7 +153,7 @@ class _ExpandableBoxState extends State<ExpandableBox> {
                     return Text(
                       widget.feedback[index],
                       style: const TextStyle(
-                        color: Colors.white, // Set text color to white
+                        color: iconColor, // Set text color to white
                         fontSize: 16, // Set font size for feedback
                       ),
                     );

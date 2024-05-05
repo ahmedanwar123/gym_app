@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:app/screens/workout_categories_page.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../shared/theme.dart';
@@ -117,92 +118,116 @@ class _FeedbackState extends State<Feedbacks> {
                   child: _buildControlBar(),
                 ),
                 const SizedBox(height: 20.0),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: borderColor,
-                      width: 3,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Cycle Counter', // Text for the container
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: borderColor,
+                        width: 3,
                       ),
-                      SizedBox(height: 10),
-                      Container(
-                        child: Column(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Correct Cycles',
-                                    style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    x.toString(), // Text for the container
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
+                              padding: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 12.0),
+                              child: Text(
+                                'Cycle Counter', // Text for the container
+                                style: TextStyle(
+                                  color: textColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                            SizedBox(height: 5,),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Wrong Cycles',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    y.toString(), // Text for the container
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ]
+                          ],
                         ),
-                      ),
-                    ],
+                        Container(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 12.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Correct Cycles',
+                                      style: TextStyle(
+                                      color: textColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      x.toString(), // Text for the container
+                                      style: TextStyle(
+                                        color: textColor,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Wrong Cycles',
+                                      style: TextStyle(
+                                        color: textColor,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      y.toString(), // Text for the container
+                                      style: TextStyle(
+                                        color: textColor,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ]
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-
-                const SizedBox(height: 5.0),
-                for (int i = 0; i < 3; i++) _buildExpandableBox(i),
-                const SizedBox(height: 16.0),
+                for (int i = 0; i < 3; i++) Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 4.0,),
+                  child: _buildExpandableBox(i),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutCategories()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonColor,
+                    ),
+                    child: Text(
+                      'Choose Another Workout',
+                      style: TextStyle(
+                        color: inversetextColor,
+                        fontSize: 20,
+                        fontFamily: 'Roboto',
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
               ],
             ),
           ),
@@ -228,13 +253,13 @@ class _FeedbackState extends State<Feedbacks> {
             onPressed: () => _changeVolume(-0.1),
             icon: Icon(Icons.volume_down),
             iconSize: 32,
-            color: Colors.white,
+            color: iconColor,
           ),
           IconButton(
             onPressed: _jumpBackward,
             icon: Icon(Icons.skip_previous),
             iconSize: 32,
-            color: Colors.white,
+            color: iconColor,
           ),
           IconButton(
             onPressed: _togglePlayPause,
@@ -242,33 +267,25 @@ class _FeedbackState extends State<Feedbacks> {
               _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
             ),
             iconSize: 32,
-            color: Colors.white,
+            color: iconColor,
           ),
           IconButton(
             onPressed: _jumpForward,
             icon: Icon(Icons.skip_next),
             iconSize: 32,
-            color: Colors.white,
+            color: iconColor,
           ),
           IconButton(
             onPressed: () => _changeVolume(0.1),
             icon: Icon(Icons.volume_up),
             iconSize: 32,
-            color: Colors.white,
+            color: iconColor,
           ),
         ],
       ),
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.5),
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3),
-          ),
-        ],
       ),
     );
   }
@@ -284,7 +301,6 @@ class _FeedbackState extends State<Feedbacks> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       children: [
-        SizedBox(height: index == 0 ? 0 : 5.0), // Add space between the boxes
         SizedBox(
           height: boxHeight,
           width: boxWidth,

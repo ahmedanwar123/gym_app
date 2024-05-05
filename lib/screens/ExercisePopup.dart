@@ -13,6 +13,42 @@ class ExercisePopup extends StatelessWidget {
     required this.exerciseName,
   }) : super(key: key);
 
+  // Function to show AlertDialog with instructions
+  void _showInstructions(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: AltDlgColor,
+          title: Text(
+              "Recording Instructions",
+            style: TextStyle(
+              color: titleColor,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+          ),
+          ),
+          alignment: Alignment.center,
+          content: Text("Please set the camera away from you from 1 to 2 meters\n\nAll of your body should be clearly seen in the video.",
+              style: TextStyle(
+              color: textColor,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Close"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -44,11 +80,24 @@ class ExercisePopup extends StatelessWidget {
                       flex: 2,
                       child: Stack(
                         children: [
+                          // Background image
                           Image.asset(
                             imagePath,
                             fit: BoxFit.cover,
                             width: double.infinity,
                             height: double.infinity,
+                          ),
+                          // Info icon
+                          Positioned(
+                            top: 10.0,
+                            right: 10.0,
+                            child: IconButton(
+                              onPressed: () {
+                                _showInstructions(context);
+                              },
+                              icon: Icon(Icons.info),
+                              color: inverseiconColor,
+                            ),
                           ),
                           Positioned(
                             bottom: 20.0,
@@ -62,7 +111,7 @@ class ExercisePopup extends StatelessWidget {
                                 shadows: [
                                   Shadow(
                                     blurRadius: 2.0,
-                                    color: Colors.black,
+                                    color: inversetextColor,
                                     offset: Offset(2.0, 2.0),
                                   ),
                                 ],
@@ -84,7 +133,7 @@ class ExercisePopup extends StatelessWidget {
                             icon: Icon(Icons.play_arrow),
                             label: Text("Live"),
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                              foregroundColor: MaterialStateProperty.all<Color>(inversetextColor),
                               backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
                               padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 12, horizontal: 98)),
                               shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(
@@ -107,7 +156,7 @@ class ExercisePopup extends StatelessWidget {
                             label: Text("Upload"),
                             icon: Icon(Icons.video_library_outlined),
                             style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                              foregroundColor: MaterialStateProperty.all<Color>(inversetextColor),
                               backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
                               padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 12, horizontal: 90)),
                               shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(
