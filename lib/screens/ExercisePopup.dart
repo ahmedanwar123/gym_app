@@ -127,8 +127,16 @@ class ExercisePopup extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           TextButton.icon(
-                            onPressed: () {
-                              recordVideo(context); // Call recordVideo function
+                            onPressed: () async {
+                              String? recordedVideoURL = await recordVideo(context);
+                              if (recordedVideoURL != null) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Feedbacks(videoURL: recordedVideoURL),
+                                  ),
+                                );
+                              }
                             },
                             icon: Icon(Icons.play_arrow),
                             label: Text("Live"),
