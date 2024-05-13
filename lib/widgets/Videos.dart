@@ -1,62 +1,64 @@
-import 'package:app/screens/Feedback.dart';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 
 // Function to request camera permission and record a video
-Future<void> recordVideo(BuildContext context) async {
-  // Check if camera permission is granted
+Future<String?> recordVideo(BuildContext context) async {
   PermissionStatus cameraPermissionStatus = await Permission.camera.status;
+  final picker = ImagePicker();
 
-  // If camera permission is not granted, request permission
   if (!cameraPermissionStatus.isGranted) {
-    // Request camera permission
     PermissionStatus permissionStatus = await Permission.camera.request();
 
-    // If permission is granted, proceed to record video
     if (permissionStatus.isGranted) {
-      _startVideoRecording(context);
+      try {
+        XFile? videoFile = await picker.pickVideo(source: ImageSource.camera);
+
+        if (videoFile != null) {
+          return videoFile.path;
+        } else {
+          return null;
+        }
+      } catch (e) {
+        print('Error recording video: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error recording video. Please try again.'),
+          ),
+        );
+        return null; // Return null after showing the error message
+      }
     } else {
-      // Permission denied, show a message or handle accordingly
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Camera permission required to record videos.'),
         ),
       );
+      return null; // Return null if permission is denied
     }
   } else {
-    // Camera permission already granted, proceed to record video
-    _startVideoRecording(context);
-  }
-}
+    try {
+      XFile? videoFile = await picker.pickVideo(source: ImageSource.camera);
 
-// Function to start video recording once permission is granted
-void _startVideoRecording(BuildContext context) async {
-  final picker = ImagePicker();
-
-  try {
-    XFile? videoFile = await picker.pickVideo(source: ImageSource.camera);
-
-    if (videoFile != null) {
-      // Navigate to feedback screen with the recorded video
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Feedbacks(videoURL: videoFile.path),
+      if (videoFile != null) {
+        return videoFile.path;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('Error recording video: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error recording video. Please try again.'),
         ),
       );
+      return null; // Return null after showing the error message
     }
-  } catch (e) {
-    // Handle any errors that occur during video recording
-    print('Error recording video: $e');
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Error recording video. Please try again.'),
-      ),
-    );
   }
 }
+
 
 // Function to upload a video from the device's gallery
 Future<String?> uploadVideo(BuildContext context) async {
