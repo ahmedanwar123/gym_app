@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:app/shared/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 // Define a class to represent the feedback structure
 class FeedbackItem {
@@ -34,16 +34,26 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
   }
 
   Future<void> _loadFeedbackData() async {
-    // Read the contents of the "feedback.txt" file
-    String data = await DefaultAssetBundle.of(context)
-        .loadString('assets/txt/feedback.txt');
+    try {
+      // Make a GET request to the local server
+      var response =
+          await http.get(Uri.parse('http://localhost:3000/video-processing'));
 
-    // Parse the JSON data into instances of the feedback class
-    List<dynamic> jsonData = json.decode(data);
-    feedbackItems =
-        jsonData.map((item) => FeedbackItem.fromJson(item)).toList();
+      if (response.statusCode == 200) {
+        // If the request is successful, parse the JSON data
+        List<dynamic> jsonData = json.decode(response.body);
+        feedbackItems =
+            jsonData.map((item) => FeedbackItem.fromJson(item)).toList();
 
-    setState(() {}); // Update the UI after loading data
+        setState(() {}); // Update the UI after loading data
+      } else {
+        // If the request fails, print the error message
+        print('Failed to load feedback data: ${response.statusCode}');
+      }
+    } catch (error) {
+      // If an error occurs during the request, print the error message
+      print('Error loading feedback data: $error');
+    }
   }
 
   @override
@@ -53,66 +63,85 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
         title: Text(
           "Cycles Feedback",
           style: TextStyle(
-            color: inversetextColor,
-            fontSize: 40,
-            wordSpacing: 2.0,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
       ),
-      backgroundColor: bgColor,
       body: feedbackItems
               .isNotEmpty // Check if feedbackItems is not empty before accessing it
-          ? ListView.builder(
-              itemCount: feedbackItems.length,
-              itemBuilder: (context, index) {
-                final feedbackItem = feedbackItems[index];
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        feedbackItem.cycle,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+          ? Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: feedbackItems.length,
+                    itemBuilder: (context, index) {
+                      final feedbackItem = feedbackItems[index];
+                      // Calculate the number of criteria met
+                      int criteriaMet = feedbackItem.feedback.values
+                          .where((value) => value == 1)
+                          .length;
+                      // Determine the overall feedback message
+                      String overallFeedback = 'Wrong cycle'; // Default message
+                      if (criteriaMet == 3) {
+                        overallFeedback = 'Correct cycle';
+                      } else if (criteriaMet == 2) {
+                        overallFeedback = 'Almost Correct cycle';
+                      } else if (criteriaMet == 1) {
+                        overallFeedback = 'Cycle needs improvement';
+                      }
+                      return Container(
+                        margin: EdgeInsets.all(8),
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Form & Technique: ${feedbackItem.feedback['Form & Technique'] == 1 ? "Met" : "Unmet"}',
-                            style: TextStyle(
-                              fontSize: 16,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Cycle: ${feedbackItem.cycle}',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Stability: ${feedbackItem.feedback['Stability'] == 1 ? "Met" : "Unmet"}',
-                            style: TextStyle(
-                              fontSize: 16,
+                            SizedBox(height: 8),
+                            Text(
+                              'Form & Technique: ${feedbackItem.feedback['Form & Technique'] == 1 ? "Met" : "Unmet"}',
+                              style: TextStyle(fontSize: 16),
                             ),
-                          ),
-                          Text(
-                            'Motion & Control: ${feedbackItem.feedback['Motion & Control'] == 1 ? "Met" : "Unmet"}',
-                            style: TextStyle(
-                              fontSize: 16,
+                            Text(
+                              'Stability: ${feedbackItem.feedback['Stability'] == 1 ? "Met" : "Unmet"}',
+                              style: TextStyle(fontSize: 16),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            Text(
+                              'Motion & Control: ${feedbackItem.feedback['Motion & Control'] == 1 ? "Met" : "Unmet"}',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'Overall Feedback: $overallFeedback',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Return to Feedback'),
+                  ),
+                ),
+              ],
             )
           : Center(
               child:

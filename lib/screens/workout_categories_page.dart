@@ -28,7 +28,8 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: bgColor, // Use the same background color as the scaffold
+          backgroundColor:
+              bgColor, // Use the same background color as the scaffold
           title: Text(
             'Coming Soon',
             style: TextStyle(color: textColor),
@@ -161,12 +162,13 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ExercisePopup(
-                          imagePath: 'assets/images/WorkoutCategories_BicepsCurl.png',
-                          exerciseName: 'Dumbbell Biceps Curl',
+                          imagePath:
+                              'assets/images/WorkoutCategories_BicepsCurl.png',
+                          exerciseName: 'bicep',
                         ),
                       ),
                     );
-                    WorkoutName = "Dumbbell Biceps Curl";
+                    WorkoutName = "bicep";
                   },
                 ),
                 WorkoutCategoryWidget(
@@ -180,7 +182,7 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                       MaterialPageRoute(
                         builder: (context) => ExercisePopup(
                           imagePath: 'assets/images/LateralRaise.jpg',
-                          exerciseName: 'Lateral Raise',
+                          exerciseName: 'lateral_raise',
                         ),
                       ),
                     );

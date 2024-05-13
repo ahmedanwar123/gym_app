@@ -1,4 +1,6 @@
 import 'package:app/screens/splash.dart';
+import 'package:app/screens/workout_categories_page.dart';
+import 'package:app/screens/cyclesFeedback.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true),
-      home: Splash(), //change this to your page class to test
+      home: WorkoutCategories(), //change this to your page class to test
     );
   }
 }

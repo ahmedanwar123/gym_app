@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:app/screens/workout_categories_page.dart';
+import 'package:app/screens/cyclesFeedback.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../shared/theme.dart';
@@ -204,6 +205,26 @@ class _FeedbackState extends State<Feedbacks> {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => CyclesFeedback()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonColor,
+                    ),
+                    child: Text(
+                      'Analyze Cycles Individally',
+                      style: TextStyle(
+                        color: inversetextColor,
+                        fontSize: 20,
+                        fontFamily: 'Roboto',
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
                 for (int i = 0; i < 3; i++) Padding(
                   padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 4.0,),
                   child: _buildExpandableBox(i),
@@ -233,12 +254,12 @@ class _FeedbackState extends State<Feedbacks> {
           ),
         ],
       ),
-      /*floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           print("Video URL: ${widget.videoURL}");
         },
         child: Icon(Icons.info),
-      ),*/
+      ),
     );
   }
 
