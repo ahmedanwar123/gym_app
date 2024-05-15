@@ -1,3 +1,4 @@
+import 'dart:convert'; // Import for decoding encoded paths
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -6,7 +7,7 @@ import 'package:http_parser/http_parser.dart';
 
 // Function to request camera permission and record a video
 Future<String?> recordVideo(BuildContext context,
-    {required String exerciseName}) async {
+    {required String excerciseName}) async {
   PermissionStatus cameraPermissionStatus = await Permission.camera.status;
   final picker = ImagePicker();
 
@@ -18,19 +19,23 @@ Future<String?> recordVideo(BuildContext context,
         XFile? videoFile = await picker.pickVideo(source: ImageSource.camera);
 
         if (videoFile != null) {
-          print(exerciseName);
+          print(excerciseName);
           print(videoFile.path);
+
+          // Decode the file path
+          String decodedFilePath = Uri.decodeFull(videoFile.path);
 
           // Create FormData object
           var request = http.MultipartRequest(
             'POST',
-            Uri.parse('http://localhost:3000/video-processing'), // Change the URL to the endpoint
+            Uri.parse(
+                'http://localhost:3000/video-processing'), // Change the URL to the endpoint
           );
-          request.fields['exercise_name'] = exerciseName;
+          request.fields['excercise_name'] = excerciseName;
           request.files.add(
             await http.MultipartFile.fromPath(
               'video',
-              videoFile.path,
+              decodedFilePath, // Use the decoded file path
               contentType: MediaType('video', 'mp4'),
             ),
           );
@@ -76,19 +81,23 @@ Future<String?> recordVideo(BuildContext context,
       XFile? videoFile = await picker.pickVideo(source: ImageSource.camera);
 
       if (videoFile != null) {
-        print(exerciseName);
+        print(excerciseName);
         print(videoFile.path);
+
+        // Decode the file path
+        String decodedFilePath = Uri.decodeFull(videoFile.path);
 
         // Create FormData object
         var request = http.MultipartRequest(
           'POST',
-          Uri.parse('http://localhost:3000/video-processing'), // Change the URL to the endpoint
+          Uri.parse(
+              'http://localhost:3000/video-processing'), // Change the URL to the endpoint
         );
-        request.fields['exercise_name'] = exerciseName;
+        request.fields['excercise_name'] = excerciseName;
         request.files.add(
           await http.MultipartFile.fromPath(
             'video',
-            videoFile.path,
+            decodedFilePath, // Use the decoded file path
             contentType: MediaType('video', 'mp4'),
           ),
         );
@@ -137,16 +146,20 @@ Future<String?> uploadVideo(BuildContext context,
       print(exerciseName);
       print(videoFile.path);
 
+      // Decode the file path
+      String decodedFilePath = Uri.decodeFull(videoFile.path);
+
       // Create FormData object
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://localhost:3000/video-processing'), // Change the URL to the endpoint
+        Uri.parse(
+            'http://localhost:3000/video-processing'), // Change the URL to the endpoint
       );
-      request.fields['exercise_name'] = exerciseName;
+      request.fields['excercise_name'] = exerciseName;
       request.files.add(
         await http.MultipartFile.fromPath(
           'video',
-          videoFile.path,
+          decodedFilePath, // Use the decoded file path
           contentType: MediaType('video', 'mp4'),
         ),
       );

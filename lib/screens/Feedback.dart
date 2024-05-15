@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'package:app/screens/workout_categories_page.dart';
-import 'package:app/screens/cyclesFeedback.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../shared/theme.dart';
 import '../widgets/expandableBox_Widget.dart';
+import 'workout_categories_page.dart';
+import 'cyclesFeedback.dart';
 
 class Feedbacks extends StatefulWidget {
   const Feedbacks({Key? key, required this.videoURL}) : super(key: key);
@@ -19,8 +19,8 @@ class _FeedbackState extends State<Feedbacks> {
   double _volumeLevel = 1.0;
   double videoContainerRatio = 0.5;
   late List<bool> isExpanded = [false, false, false];
-  late int x =0;
-  late int y =0;
+  late int x = 0;
+  late int y = 0;
 
   final List<String> exerciseFeedback = [
     'Form & Technique',
@@ -48,17 +48,25 @@ class _FeedbackState extends State<Feedbacks> {
   void initState() {
     super.initState();
     isExpanded = List.generate(3, (index) => false);
-    _controller = VideoPlayerController.file(File(widget.videoURL))
-      ..initialize().then((_) {
-        setState(() {});
-      })
-      ..setLooping(true);
+    _initVideoPlayer();
   }
 
   @override
   void dispose() {
     super.dispose();
     _controller.dispose();
+  }
+
+  void _initVideoPlayer() async {
+    try {
+      _controller = VideoPlayerController.file(File(widget.videoURL));
+      await _controller.initialize();
+      setState(() {});
+      _controller.setLooping(true);
+    } catch (error) {
+      print("Error initializing video player: $error");
+      // Handle error appropriately (e.g., show error message to user)
+    }
   }
 
   void _togglePlayPause() {
@@ -103,7 +111,8 @@ class _FeedbackState extends State<Feedbacks> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: MediaQuery.of(context).size.height * videoContainerRatio,
+            expandedHeight:
+                MediaQuery.of(context).size.height * videoContainerRatio,
             flexibleSpace: FlexibleSpaceBar(
               background: AspectRatio(
                 aspectRatio: _controller.value.aspectRatio * getScale(),
@@ -129,7 +138,6 @@ class _FeedbackState extends State<Feedbacks> {
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
-
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -137,7 +145,8 @@ class _FeedbackState extends State<Feedbacks> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 12.0),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 6.0, horizontal: 12.0),
                               child: Text(
                                 'Cycle Counter', // Text for the container
                                 style: TextStyle(
@@ -150,56 +159,59 @@ class _FeedbackState extends State<Feedbacks> {
                           ],
                         ),
                         Container(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 6.0,horizontal: 12.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Correct Cycles',
-                                      style: TextStyle(
+                          child: Column(children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 6.0, horizontal: 12.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Correct Cycles',
+                                    style: TextStyle(
                                       color: textColor,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
-                                      ),
                                     ),
-                                    Text(
-                                      x.toString(), // Text for the container
-                                      style: TextStyle(
-                                        color: textColor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                  ),
+                                  Text(
+                                    x.toString(), // Text for the container
+                                    style: TextStyle(
+                                      color: textColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Wrong Cycles',
-                                      style: TextStyle(
-                                        color: textColor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Wrong Cycles',
+                                    style: TextStyle(
+                                      color: textColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    Text(
-                                      y.toString(), // Text for the container
-                                      style: TextStyle(
-                                        color: textColor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                  ),
+                                  Text(
+                                    y.toString(), // Text for the container
+                                    style: TextStyle(
+                                      color: textColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  ],
-                                ),
-                              )
-                            ]
-                          ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ]),
                         ),
                       ],
                     ),
@@ -209,13 +221,16 @@ class _FeedbackState extends State<Feedbacks> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => CyclesFeedback()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CyclesFeedback()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: buttonColor,
                     ),
                     child: Text(
-                      'Analyze Cycles Individally',
+                      'Analyze Cycles Individually',
                       style: TextStyle(
                         color: inversetextColor,
                         fontSize: 20,
@@ -225,15 +240,22 @@ class _FeedbackState extends State<Feedbacks> {
                   ),
                 ),
                 SizedBox(height: 20),
-                for (int i = 0; i < 3; i++) Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 4.0,),
-                  child: _buildExpandableBox(i),
-                ),
+                for (int i = 0; i < 3; i++)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 0.0,
+                      horizontal: 4.0,
+                    ),
+                    child: _buildExpandableBox(i),
+                  ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => WorkoutCategories()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WorkoutCategories()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: buttonColor,
@@ -310,6 +332,7 @@ class _FeedbackState extends State<Feedbacks> {
       ),
     );
   }
+
   Widget _buildExpandableBox(int index) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
@@ -332,17 +355,20 @@ class _FeedbackState extends State<Feedbacks> {
             onToggle: () => setState(() {
               isExpanded[index] = !isExpanded[index];
             }),
-            frontGifPath: 'assets/gifs/${index + 1}front.gif', // Example path for front GIF
-            sideGifPath: 'assets/gifs/${index + 1}side.gif', // Example path for side GIF
+            frontGifPath:
+                'assets/gifs/${index + 1}front.gif', // Example path for front GIF
+            sideGifPath:
+                'assets/gifs/${index + 1}side.gif', // Example path for side GIF
           ),
         ),
       ],
     );
   }
 
-
   double getScale() {
     double videoRatio = _controller.value.aspectRatio;
-    return videoRatio < videoContainerRatio ? videoContainerRatio / videoRatio : videoRatio / videoContainerRatio;
+    return videoRatio < videoContainerRatio
+        ? videoContainerRatio / videoRatio
+        : videoRatio / videoContainerRatio;
   }
 }

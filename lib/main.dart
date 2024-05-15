@@ -1,3 +1,4 @@
+import 'package:app/screens/onboarding_1.dart';
 import 'package:app/screens/splash.dart';
 import 'package:app/screens/workout_categories_page.dart';
 import 'package:app/screens/cyclesFeedback.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true),
-      home: WorkoutCategories(), //change this to your page class to test
+      home: Onboarding_1(), //change this to your page class to test
     );
   }
 }

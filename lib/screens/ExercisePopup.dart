@@ -131,8 +131,9 @@ class ExercisePopup extends StatelessWidget {
                           TextButton.icon(
                             onPressed: () async {
                               String? recordedVideoURL = await recordVideo(
-                                  context,
-                                  exerciseName: exerciseName);
+                                context,
+                                excerciseName: exerciseName,
+                              );
                               if (recordedVideoURL != null) {
                                 Navigator.push(
                                   context,
@@ -156,15 +157,16 @@ class ExercisePopup extends StatelessWidget {
                                           vertical: 12, horizontal: 98)),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
                                   RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              )),
+                                      borderRadius:
+                                          BorderRadius.circular(50.0))),
                             ),
                           ),
                           TextButton.icon(
                             onPressed: () async {
                               String? uploadedVideoURL = await uploadVideo(
-                                  context,
-                                  exerciseName: exerciseName);
+                                context,
+                                exerciseName: exerciseName,
+                              );
                               if (uploadedVideoURL != null) {
                                 Navigator.push(
                                   context,
@@ -188,8 +190,8 @@ class ExercisePopup extends StatelessWidget {
                                           vertical: 12, horizontal: 90)),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
                                   RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              )),
+                                      borderRadius:
+                                          BorderRadius.circular(50.0))),
                             ),
                           ),
                           TextButton(
@@ -206,8 +208,8 @@ class ExercisePopup extends StatelessWidget {
                                           vertical: 12, horizontal: 24)),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
                                   RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              )),
+                                      borderRadius:
+                                          BorderRadius.circular(10.0))),
                             ),
                           ),
                         ],
