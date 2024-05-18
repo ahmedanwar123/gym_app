@@ -1,4 +1,4 @@
-import 'dart:convert'; // Import for decoding encoded paths
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -29,7 +29,7 @@ Future<String?> recordVideo(BuildContext context,
           var request = http.MultipartRequest(
             'POST',
             Uri.parse(
-                'http://localhost:3000/video-processing'), // Change the URL to the endpoint
+                'http://192.168.1.19:3000/video-processing'), // Change the URL to the endpoint
           );
           request.fields['excercise_name'] = excerciseName;
           request.files.add(
@@ -46,7 +46,8 @@ Future<String?> recordVideo(BuildContext context,
 
           if (response.statusCode == 200) {
             // Request successful
-            return "Video recorded successfully";
+            print("Video recorded successfully") ;
+            return videoFile.path;
           } else {
             // Request failed
             ScaffoldMessenger.of(context).showSnackBar(
@@ -54,10 +55,13 @@ Future<String?> recordVideo(BuildContext context,
                 content: Text('Failed to upload video. Please try again.'),
               ),
             );
+            print("failed") ;
             return null;
           }
         } else {
+          print("failed") ;
           return null;
+
         }
       } catch (e) {
         print('Error recording video: $e');
@@ -66,6 +70,7 @@ Future<String?> recordVideo(BuildContext context,
             content: Text('Error recording video. Please try again.'),
           ),
         );
+        print("failed") ;
         return null; // Return null after showing the error message
       }
     } else {
@@ -74,6 +79,7 @@ Future<String?> recordVideo(BuildContext context,
           content: Text('Camera permission required to record videos.'),
         ),
       );
+      print("failed") ;
       return null; // Return null if permission is denied
     }
   } else {
@@ -91,7 +97,7 @@ Future<String?> recordVideo(BuildContext context,
         var request = http.MultipartRequest(
           'POST',
           Uri.parse(
-              'http://localhost:3000/video-processing'), // Change the URL to the endpoint
+              'http://192.168.1.19:3000/video-processing'), // Change the URL to the endpoint
         );
         request.fields['excercise_name'] = excerciseName;
         request.files.add(
@@ -108,7 +114,8 @@ Future<String?> recordVideo(BuildContext context,
 
         if (response.statusCode == 200) {
           // Request successful
-          return "Video recorded successfully";
+          print("Video recorded successfully") ;
+          return videoFile.path;
         } else {
           // Request failed
           ScaffoldMessenger.of(context).showSnackBar(
@@ -116,9 +123,11 @@ Future<String?> recordVideo(BuildContext context,
               content: Text('Failed to upload video. Please try again.'),
             ),
           );
+          print("failed") ;
           return null;
         }
       } else {
+        print("failed") ;
         return null;
       }
     } catch (e) {
@@ -153,7 +162,7 @@ Future<String?> uploadVideo(BuildContext context,
       var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'http://localhost:3000/video-processing'), // Change the URL to the endpoint
+            'http://192.168.1.19:3000/video-processing'), // Change the URL to the endpoint
       );
       request.fields['excercise_name'] = exerciseName;
       request.files.add(
@@ -170,8 +179,10 @@ Future<String?> uploadVideo(BuildContext context,
 
       if (response.statusCode == 200) {
         // Request successful
-        return "Video uploaded successfully";
+        print("Video recorded successfully") ;
+        return videoFile.path;
       } else {
+        print("failed") ;
         // Request failed
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -182,6 +193,7 @@ Future<String?> uploadVideo(BuildContext context,
       }
     } else {
       // No video selected
+      print("failed") ;
       return null;
     }
   } catch (e) {

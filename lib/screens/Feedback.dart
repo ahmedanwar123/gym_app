@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../shared/theme.dart';
 import '../widgets/expandableBox_Widget.dart';
+import 'cf1.dart';
+import 'cf2.dart';
 import 'workout_categories_page.dart';
 import 'cyclesFeedback.dart';
 
 class Feedbacks extends StatefulWidget {
-  const Feedbacks({Key? key, required this.videoURL}) : super(key: key);
+  const Feedbacks({Key? key, required this.videoURL,required this.exercise_name,}) : super(key: key);
   final String videoURL;
+  final String exercise_name;
 
   @override
   State<Feedbacks> createState() => _FeedbackState();
@@ -23,25 +26,21 @@ class _FeedbackState extends State<Feedbacks> {
   late int y = 0;
 
   final List<String> exerciseFeedback = [
-    'Form & Technique',
-    'Stability',
-    'Motion & Control'
+    'Tips for Form & Technique',
+    'Tips for Stability',
+    'Tips for Motion & Control'
   ];
-  final List<String> feedbackPoints = [
-    'Feedback Point A',
-    'Feedback Point B',
-    'Feedback Point C',
-    'Feedback Point D',
-    'Feedback Point E',
-    'Feedback Point F',
-    'Feedback Point G',
-    'Feedback Point H',
-    'Feedback Point I',
-    'Feedback Point J',
-    'Feedback Point K',
-    'Feedback Point L',
-    'Feedback Point M',
-    'Feedback Point N',
+
+    final List<String> feedbackPoints = [
+    'Ensure an upright posture',
+    'Elbows should be close to your torso',
+    'Elbows shouldn\'t be far way',
+    'Minimize the swinging',
+    'Shoulders should remain stable throughout the exercise',
+    'Stand Still while lifting the dumbells ',
+    'The dumbbells should be lifted with a full range of motion',
+    'Avoid Hyperextension of your elbow joint',
+    'Avoid rapid motions',
   ];
 
   @override
@@ -127,96 +126,15 @@ class _FeedbackState extends State<Feedbacks> {
                   alignment: Alignment.bottomCenter,
                   child: _buildControlBar(),
                 ),
-                const SizedBox(height: 20.0),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: borderColor,
-                        width: 3,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
+                const SizedBox(height: 5.0),
+                for (int i = 0; i < 3; i++)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 0.0,
+                      horizontal: 4.0,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 6.0, horizontal: 12.0),
-                              child: Text(
-                                'Cycle Counter', // Text for the container
-                                style: TextStyle(
-                                  color: textColor,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          child: Column(children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 6.0, horizontal: 12.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Correct Cycles',
-                                    style: TextStyle(
-                                      color: textColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    x.toString(), // Text for the container
-                                    style: TextStyle(
-                                      color: textColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(12, 6, 12, 12),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Wrong Cycles',
-                                    style: TextStyle(
-                                      color: textColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    y.toString(), // Text for the container
-                                    style: TextStyle(
-                                      color: textColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ]),
-                        ),
-                      ],
-                    ),
+                    child: _buildExpandableBox(i),
                   ),
-                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
@@ -225,6 +143,17 @@ class _FeedbackState extends State<Feedbacks> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => CyclesFeedback()));
+                      /*if (widget.exercise_name == 'bicep') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CF1()),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CF2()),
+                        );
+                      }*/
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: buttonColor,
@@ -239,15 +168,6 @@ class _FeedbackState extends State<Feedbacks> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
-                for (int i = 0; i < 3; i++)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 0.0,
-                      horizontal: 4.0,
-                    ),
-                    child: _buildExpandableBox(i),
-                  ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
@@ -276,12 +196,12 @@ class _FeedbackState extends State<Feedbacks> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         onPressed: () {
           print("Video URL: ${widget.videoURL}");
         },
         child: Icon(Icons.info),
-      ),
+      ),*/
     );
   }
 
