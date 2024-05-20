@@ -139,7 +139,7 @@ class ExercisePopup extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        Feedbacks(videoURL: recordedVideoURL,exercise_name: exerciseName,),
+                                        Feedbacks(videoURL: recordedVideoURL),
                                   ),
                                 );
                               }
@@ -172,7 +172,7 @@ class ExercisePopup extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        Feedbacks(videoURL: uploadedVideoURL,exercise_name: exerciseName,),
+                                        Feedbacks(videoURL: uploadedVideoURL),
                                   ),
                                 );
                               }

@@ -29,7 +29,7 @@ Future<String?> recordVideo(BuildContext context,
           var request = http.MultipartRequest(
             'POST',
             Uri.parse(
-                'http://192.168.1.19:3000/video-processing'), // Change the URL to the endpoint
+                'http://192.168.110.52:3000/video-processing'), // Change the URL to the endpoint
           );
           request.fields['excercise_name'] = excerciseName;
           request.files.add(
@@ -97,7 +97,7 @@ Future<String?> recordVideo(BuildContext context,
         var request = http.MultipartRequest(
           'POST',
           Uri.parse(
-              'http://192.168.1.19:3000/video-processing'), // Change the URL to the endpoint
+              'http://192.168.110.52:3000/video-processing'), // Change the URL to the endpoint
         );
         request.fields['excercise_name'] = excerciseName;
         request.files.add(
@@ -162,7 +162,7 @@ Future<String?> uploadVideo(BuildContext context,
       var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'http://192.168.1.19:3000/video-processing'), // Change the URL to the endpoint
+            'http://192.168.110.52:3000/video-processing'), // Change the URL to the endpoint
       );
       request.fields['excercise_name'] = exerciseName;
       request.files.add(

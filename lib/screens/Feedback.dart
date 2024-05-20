@@ -9,9 +9,9 @@ import 'workout_categories_page.dart';
 import 'cyclesFeedback.dart';
 
 class Feedbacks extends StatefulWidget {
-  const Feedbacks({Key? key, required this.videoURL,required this.exercise_name,}) : super(key: key);
+  const Feedbacks({Key? key, required this.videoURL}) : super(key: key);
   final String videoURL;
-  final String exercise_name;
+
 
   @override
   State<Feedbacks> createState() => _FeedbackState();

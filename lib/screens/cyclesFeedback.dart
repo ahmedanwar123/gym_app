@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:app/shared/theme.dart';
 
@@ -38,7 +37,7 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
   Future<void> _loadFeedbackData() async {
     try {
       // Make an HTTP GET request to fetch data from the server
-      var response = await http.get(Uri.parse('http://localhost:3000/video-processing'));
+      var response = await http.get(Uri.parse('http://192.168.110.52:3000/video-processing'));
 
       // Check if the request was successful (status code 200)
       if (response.statusCode == 200) {
