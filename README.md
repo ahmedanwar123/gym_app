@@ -1,10 +1,10 @@
-# PBL App
+# Workout Form Assesment
 
 ![Group 7](https://github.com/ahmedanwar123/pbl-app/assets/49812918/842e994f-877e-4eae-98c0-ffe00968bab3)
 
 ## Introduction
 
-Welcome to PBL App! This project is designed for workout form assessment, utilizing Flutter and Dart for the frontend and integrated with a backend Node.js server. Whether you're a fitness enthusiast, personal trainer, or physical therapist, this app aims to provide a convenient tool for assessing and improving workout forms effectively.
+Welcome to Workout form assesment, our PBL App! This project is designed for workout form assessment, utilizing Flutter and Dart for the frontend and integrated with a backend Node.js server. Whether you're a fitness enthusiast, personal trainer, or physical therapist, this app aims to provide a convenient tool for assessing and improving workout forms effectively.
 
 ## Features
 
@@ -20,13 +20,13 @@ To get started with PBL App, follow these simple steps:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/ahmedanwar123/pbl-app.git
+    git clone https://github.com/ahmedanwar123/workout-form-assesment-frontend.git
     ```
 
 2. Navigate to the project directory:
 
     ```bash
-    cd pbl-app
+    cd workout-form-assesment-frontend
     ```
 
 3. Install dependencies:
