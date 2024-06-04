@@ -132,7 +132,7 @@ class ExercisePopup extends StatelessWidget {
                             onPressed: () async {
                               String? recordedVideoURL = await recordVideo(
                                 context,
-                                excerciseName: exerciseName,
+                                exerciseName: exerciseName,
                               );
                               if (recordedVideoURL != null) {
                                 Navigator.push(

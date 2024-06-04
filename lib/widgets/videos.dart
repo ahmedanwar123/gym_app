@@ -7,7 +7,7 @@ import 'package:http_parser/http_parser.dart';
 
 // Function to request camera permission and record a video
 Future<String?> recordVideo(BuildContext context,
-    {required String excerciseName}) async {
+    {required String exerciseName}) async {
   PermissionStatus cameraPermissionStatus = await Permission.camera.status;
   final picker = ImagePicker();
 
@@ -19,7 +19,7 @@ Future<String?> recordVideo(BuildContext context,
         XFile? videoFile = await picker.pickVideo(source: ImageSource.camera);
 
         if (videoFile != null) {
-          print(excerciseName);
+          print(exerciseName);
           print(videoFile.path);
 
           // Decode the file path
@@ -29,9 +29,9 @@ Future<String?> recordVideo(BuildContext context,
           var request = http.MultipartRequest(
             'POST',
             Uri.parse(
-                'http://192.168.110.52:3000/video-processing'), // Change the URL to the endpoint
+                'http://192.168.1.5:3000/video-processing'), // Change the URL to the endpoint
           );
-          request.fields['excercise_name'] = excerciseName;
+          request.fields['exercise_name'] = exerciseName;
           request.files.add(
             await http.MultipartFile.fromPath(
               'video',
@@ -87,7 +87,7 @@ Future<String?> recordVideo(BuildContext context,
       XFile? videoFile = await picker.pickVideo(source: ImageSource.camera);
 
       if (videoFile != null) {
-        print(excerciseName);
+        print(exerciseName);
         print(videoFile.path);
 
         // Decode the file path
@@ -97,9 +97,9 @@ Future<String?> recordVideo(BuildContext context,
         var request = http.MultipartRequest(
           'POST',
           Uri.parse(
-              'http://192.168.110.52:3000/video-processing'), // Change the URL to the endpoint
+              'http://192.168.1.5:3000/video-processing'), // Change the URL to the endpoint
         );
-        request.fields['excercise_name'] = excerciseName;
+        request.fields['exercise_name'] = exerciseName;
         request.files.add(
           await http.MultipartFile.fromPath(
             'video',
@@ -162,9 +162,9 @@ Future<String?> uploadVideo(BuildContext context,
       var request = http.MultipartRequest(
         'POST',
         Uri.parse(
-            'http://192.168.110.52:3000/video-processing'), // Change the URL to the endpoint
+            'http://192.168.1.5:3000/video-processing'), // Change the URL to the endpoint
       );
-      request.fields['excercise_name'] = exerciseName;
+      request.fields['exercise_name'] = exerciseName;
       request.files.add(
         await http.MultipartFile.fromPath(
           'video',

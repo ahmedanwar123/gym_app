@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../shared/theme.dart';
 import '../widgets/expandableBox_Widget.dart';
-import 'cf1.dart';
-import 'cf2.dart';
 import 'workout_categories_page.dart';
 import 'cyclesFeedback.dart';
 
