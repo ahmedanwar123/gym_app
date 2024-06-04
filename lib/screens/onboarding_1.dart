@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:app/shared/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'Onboarding_2.dart';
-import 'Onboarding_3.dart';
+import 'onboarding_2.dart';
+import 'onboarding_3.dart';
 
 class Onboarding_1 extends StatefulWidget {
   const Onboarding_1({Key? key}) : super(key: key);

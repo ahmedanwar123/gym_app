@@ -1,4 +1,8 @@
+import 'package:app/screens/onboarding_1.dart';
+import 'package:app/screens/onboarding_3.dart';
 import 'package:app/screens/splash.dart';
+import 'package:app/screens/workout_categories_page.dart';
+import 'package:app/screens/cyclesFeedback.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true),
-      home: Splash(), //change this to your page class to test
+      home: Onboarding_3(), //change this to your page class to test
     );
   }
 }
