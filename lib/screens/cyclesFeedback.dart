@@ -7,19 +7,27 @@ import 'package:app/shared/theme.dart';
 class FeedbackItem {
   final String cycle;
   final Map<String, int> feedback;
+  final List<String> video;
 
-  FeedbackItem({required this.cycle, required this.feedback});
+  FeedbackItem({
+    required this.cycle,
+    required this.feedback,
+    required this.video,
+  });
 
   factory FeedbackItem.fromJson(Map<String, dynamic> json) {
     return FeedbackItem(
       cycle: json['cycle'],
       feedback: Map<String, int>.from(json['feedback']),
+      video: List<String>.from(json['video']),
     );
   }
 }
 
 class CyclesFeedback extends StatefulWidget {
   const CyclesFeedback({Key? key}) : super(key: key);
+
+  final String ip = 'http://localhost:3000/video-processing'; // Change the IP address if needed
 
   @override
   State<CyclesFeedback> createState() => _CyclesFeedbackState();
@@ -36,23 +44,29 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
 
   Future<void> _loadFeedbackData() async {
     try {
-      // Make an HTTP GET request to fetch data from the server
-      var response = await http.get(Uri.parse('http://192.168.110.52:3000/video-processing'));
+      var response = await http.get(Uri.parse(widget.ip));
 
-      // Check if the request was successful (status code 200)
       if (response.statusCode == 200) {
-        // Decode the JSON response
-        List<dynamic> jsonData = json.decode(response.body);
+        List<dynamic> jsonData = json.decode(response.body)['new_res'];
         feedbackItems = jsonData.map((item) => FeedbackItem.fromJson(item)).toList();
-
         setState(() {}); // Update the UI after loading data
       } else {
-        // If the server returned an error response, print the error status code
         print('Failed to load feedback data: ${response.statusCode}');
       }
     } catch (error) {
-      // If an error occurs during the request, print the error message
       print('Error loading feedback data: $error');
+    }
+  }
+
+  String _determineOverallFeedback(int criteriaMet) {
+    if (criteriaMet == 3) {
+      return 'Correct cycle';
+    } else if (criteriaMet == 2) {
+      return 'Almost Correct cycle';
+    } else if (criteriaMet == 1) {
+      return 'Cycle needs improvement';
+    } else {
+      return 'Wrong cycle';
     }
   }
 
@@ -81,31 +95,15 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
               itemCount: feedbackItems.length,
               itemBuilder: (context, index) {
                 final feedbackItem = feedbackItems[index];
-                // Calculate the number of criteria met
-                int criteriaMet = feedbackItem.feedback.values
-                    .where((value) => value == 1)
-                    .length;
-                // Determine the overall feedback message
-                String overallFeedback =
-                    'Wrong cycle'; // Default message
-                if (criteriaMet == 3) {
-                  overallFeedback = 'Wrong cycle';
-                } else if (criteriaMet == 2) {
-                  overallFeedback = 'Almost Correct cycle';
-                } else if (criteriaMet == 1) {
-                  overallFeedback = 'Cycle needs improvement';
-                } else {
-                  overallFeedback = 'Correct cycle';
-                }
+                int criteriaMet = feedbackItem.feedback.values.where((value) => value == 1).length;
+                String overallFeedback = _determineOverallFeedback(criteriaMet);
+
                 return Container(
                   margin: EdgeInsets.all(8),
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: borderColor,
-                      width: 3, // Set border thickness
-                    ),
-                    borderRadius: BorderRadius.circular(20), // Set border radius
+                    border: Border.all(color: borderColor, width: 3),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,16 +120,16 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'Form & Technique: ${feedbackItem.feedback['Form & Technique'] == 1 ? "Met" : "Unmet"}',
-                        style: TextStyle(color: textColor,fontSize: 16),
+                        'Form & Technique: ${feedbackItem.feedback['Criteria 1'] == 1 ? "Met" : "Unmet"}',
+                        style: TextStyle(color: textColor, fontSize: 16),
                       ),
                       Text(
-                        'Stability: ${feedbackItem.feedback['Stability'] == 1 ? "Met" : "Unmet"}',
-                        style: TextStyle(color: textColor,fontSize: 16),
+                        'Stability: ${feedbackItem.feedback['Criteria 2'] == 1 ? "Met" : "Unmet"}',
+                        style: TextStyle(color: textColor, fontSize: 16),
                       ),
                       Text(
-                        'Motion & Control: ${feedbackItem.feedback['Motion & Control'] == 1 ? "Met" : "Unmet"}',
-                        style: TextStyle(color: textColor,fontSize: 16),
+                        'Motion & Control: ${feedbackItem.feedback['Criteria 3'] == 1 ? "Met" : "Unmet"}',
+                        style: TextStyle(color: textColor, fontSize: 16),
                       ),
                       SizedBox(height: 8),
                       Text.rich(
@@ -143,12 +141,28 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
                             ),
                             TextSpan(
                               text: overallFeedback,
-                              style: TextStyle(fontWeight:FontWeight.bold,color: SectextColor, fontSize: 16),
+                              style: TextStyle(fontWeight: FontWeight.bold, color: SectextColor, fontSize: 16),
                             ),
                           ],
                         ),
                       ),
-
+                      SizedBox(height: 8),
+                      Text(
+                        'Videos:',
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Column(
+                        children: feedbackItem.video.map((video) {
+                          return Text(
+                            video,
+                            style: TextStyle(color: textColor, fontSize: 12),
+                          );
+                        }).toList(),
+                      ),
                     ],
                   ),
                 );
@@ -164,11 +178,14 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: buttonColor,
               ),
-              child: Text('Return to Overall Feedback',style: TextStyle(
-                color: inversetextColor,
-                fontSize: 20,
-                fontFamily: 'Roboto',
-              ),),
+              child: Text(
+                'Return to Overall Feedback',
+                style: TextStyle(
+                  color: inversetextColor,
+                  fontSize: 20,
+                  fontFamily: 'Roboto',
+                ),
+              ),
             ),
           ),
         ],

@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:app/screens/Feedback.dart';
 import 'package:app/shared/theme.dart';
 import 'package:app/widgets/videos.dart';
-import 'package:app/screens/workout_categories_page.dart';
+
+import 'feedbackscreen.dart';
 
 class ExercisePopup extends StatelessWidget {
   final String imagePath;
   final String exerciseName;
+  final String Workoutlevel;
 
   const ExercisePopup({
     Key? key,
     required this.imagePath,
     required this.exerciseName,
+    required this.Workoutlevel,
   }) : super(key: key);
 
   // Function to show AlertDialog with instructions
@@ -132,14 +135,14 @@ class ExercisePopup extends StatelessWidget {
                             onPressed: () async {
                               String? recordedVideoURL = await recordVideo(
                                 context,
-                                excerciseName: exerciseName,
+                                exerciseName: exerciseName,
                               );
                               if (recordedVideoURL != null) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        Feedbacks(videoURL: recordedVideoURL),
+                                        Feedbacks(videoURL: recordedVideoURL,Workoutlevel:Workoutlevel, exerciseName: exerciseName,),
                                   ),
                                 );
                               }
@@ -172,7 +175,7 @@ class ExercisePopup extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        Feedbacks(videoURL: uploadedVideoURL),
+                                        Feedbackscreen(videoURL: uploadedVideoURL,Workoutlevel:Workoutlevel, exerciseName: exerciseName,),
                                   ),
                                 );
                               }

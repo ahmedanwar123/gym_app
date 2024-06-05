@@ -19,8 +19,9 @@ class FeedbackItem {
 }
 
 class CF1 extends StatefulWidget {
-  const CF1({Key? key}) : super(key: key);
-
+  const CF1({Key? key,required this.Workoutlevel, required this.exerciseName}) : super(key: key);
+  final String Workoutlevel;
+  final String exerciseName;
   @override
   State<CF1> createState() => _CyclesFeedbackState();
 }
@@ -34,10 +35,30 @@ class _CyclesFeedbackState extends State<CF1> {
     _loadFeedbackData();
   }
 
+   String _file(String Workoutlevel, String exerciseName) {
+    String feedbackfile = '';
+
+    if (Workoutlevel == 'Beginner' && exerciseName == 'bicep') {
+      feedbackfile = 'assets/txt/222.txt';
+    } else if (Workoutlevel == 'Intermediate' && exerciseName == 'bicep') {
+      feedbackfile = 'assets/txt/02132.txt';
+    } else if (Workoutlevel == 'Advanced' && exerciseName == 'bicep') {
+      feedbackfile = 'assets/txt/333333.txt';
+    } else if (Workoutlevel == 'Beginner' && exerciseName == 'lateral_raise') {
+      feedbackfile = 'assets/txt/111222.txt';
+    } else if (Workoutlevel == 'Intermediate' && exerciseName == 'lateral_raise') {
+      feedbackfile = 'assets/txt/3210.txt';
+    } else if (Workoutlevel == 'Advanced' && exerciseName == 'lateral_raise') {
+      feedbackfile = 'assets/txt/00000000.txt';
+    }
+    return feedbackfile;
+  }
+
+
   Future<void> _loadFeedbackData() async {
     try {
       // Read data from the file
-      String data = await rootBundle.loadString('assets/txt/f1.txt');
+      String data = await rootBundle.loadString(_file(widget.Workoutlevel, widget.exerciseName));
 
       // Parse the JSON data
       List<dynamic> jsonData = json.decode(data);
@@ -83,7 +104,7 @@ class _CyclesFeedbackState extends State<CF1> {
                 // Determine the overall feedback message
                 String overallFeedback =
                     'Wrong cycle'; // Default message
-                if (criteriaMet == 3) {
+                if (criteriaMet == 0) {
                   overallFeedback = 'Wrong cycle';
                 } else if (criteriaMet == 2) {
                   overallFeedback = 'Almost Correct cycle';

@@ -1,0 +1,42 @@
+[
+  {
+    "cycle": "Cycle 1",
+    "feedback": {
+      "Form & Technique": 0,
+      "Stability": 0,
+      "Motion & Control": 0
+    }
+  },
+  {
+    "cycle": "Cycle 2",
+    "feedback": {
+      "Form & Technique": 1,
+      "Stability": 1,
+      "Motion & Control": 0
+    }
+  },
+  {
+    "cycle": "Cycle 3",
+    "feedback": {
+      "Form & Technique": 0,
+      "Stability": 0,
+      "Motion & Control": 1
+    }
+  },
+  {
+    "cycle": "Cycle 4",
+    "feedback": {
+      "Form & Technique": 1,
+      "Stability": 1,
+      "Motion & Control": 1
+    }
+  },
+  {
+    "cycle": "Cycle 5",
+    "feedback": {
+      "Form & Technique": 1,
+      "Stability": 0,
+      "Motion & Control": 1
+    }
+  }
+]

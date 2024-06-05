@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../shared/theme.dart';
 import '../widgets/expandableBox_Widget.dart';
-import 'cf1.dart';
-import 'cf2.dart';
 import 'workout_categories_page.dart';
 import 'cyclesFeedback.dart';
+import 'cf1.dart';
 
 class Feedbacks extends StatefulWidget {
-  const Feedbacks({Key? key, required this.videoURL}) : super(key: key);
-  final String videoURL;
 
+  const Feedbacks({Key? key, required this.Workoutlevel,required this.videoURL, required this.exerciseName}) : super(key: key);
+  final String videoURL;
+  final String Workoutlevel;
+  final String exerciseName;
 
   @override
   State<Feedbacks> createState() => _FeedbackState();
@@ -25,23 +26,50 @@ class _FeedbackState extends State<Feedbacks> {
   late int x = 0;
   late int y = 0;
 
-  final List<String> exerciseFeedback = [
-    'Tips for Form & Technique',
-    'Tips for Stability',
-    'Tips for Motion & Control'
+  final List<String> bicepexerciseFeedback = [
+    'Tips for bicep Form & Technique',
+    'Tips for bicep Stability',
+    'Tips for bicep Motion & Control'
+  ];
+  final List<String> lateralexerciseFeedback = [
+    'Tips for lateral raise Form & Technique',
+    'Tips for lateral raise Stability',
+    'Tips for lateral raise Motion & Control'
   ];
 
-    final List<String> feedbackPoints = [
-    'Ensure an upright posture',
-    'Elbows should be close to your torso',
-    'Elbows shouldn\'t be far way',
-    'Minimize the swinging',
-    'Shoulders should remain stable throughout the exercise',
-    'Stand Still while lifting the dumbells ',
-    'The dumbbells should be lifted with a full range of motion',
-    'Avoid Hyperextension of your elbow joint',
-    'Avoid rapid motions',
+  bool ex( String exerciseName) {
+    bool ex;
+
+    if ( exerciseName == 'bicep') {
+      ex = true;
+    } else  {
+      ex = false;
+    }
+    return ex;
+  }
+  final List<String> bicepfeedbackPoints = [
+    '- Ensure an upright posture',
+    '- Elbows should be close to your torso',
+    '- Elbows shouldn\'t be far way',
+    '- Minimize the swinging',
+    '-Shoulders should remain stable throughout the exercise',
+    '-Stand Still while lifting the dumbells ',
+    '-The dumbbells should be lifted with a full range of motion',
+    '-Avoid Hyperextension of your elbow joint',
+    '-Avoid rapid motions',
   ];
+  final List<String> lateralfeedbackpoints = [
+    'Ensure maintaining an upright posture with shoulders back and chest up.',
+    'Ensure raising the dumbbells directly to your sides, keeping your arms straight or slightly bent at elbows.',
+    'Ensure holding dumbbells with a natural grip with palms facing the thighs.',
+    'Ensure minimizing swinging while lifting the dumbbells.',
+    'Ensure shoulders should remain stable throughout the exercise.',
+    'Ensure stand still while lifting the dumbbells.',
+    'Ensure raising the dumbbells until parallel to the ground or slightly below shoulder height.',
+    'Ensure controlling the movement tempo and avoiding rapid motions.',
+    'Ensure avoiding hyperextension of elbow joints & excessive elevation or protraction of shoulder blades.',
+  ];
+
 
   @override
   void initState() {
@@ -58,15 +86,21 @@ class _FeedbackState extends State<Feedbacks> {
 
   void _initVideoPlayer() async {
     try {
-      _controller = VideoPlayerController.file(File(widget.videoURL));
-      await _controller.initialize();
-      setState(() {});
-      _controller.setLooping(true);
+      if (File(widget.videoURL).existsSync()) {
+        _controller = VideoPlayerController.file(File(widget.videoURL));
+        await _controller.initialize();
+        setState(() {});
+        _controller.setLooping(true);
+      } else {
+        // Handle case where video file doesn't exist
+        print("Video file doesn't exist.");
+      }
     } catch (error) {
       print("Error initializing video player: $error");
       // Handle error appropriately (e.g., show error message to user)
     }
   }
+
 
   void _togglePlayPause() {
     setState(() {
@@ -143,17 +177,6 @@ class _FeedbackState extends State<Feedbacks> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => CyclesFeedback()));
-                      /*if (widget.exercise_name == 'bicep') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CF1()),
-                        );
-                      } else {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CF2()),
-                        );
-                      }*/
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: buttonColor,
@@ -258,7 +281,7 @@ class _FeedbackState extends State<Feedbacks> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     // Calculate the box height and width based on screen dimensions and desired ratio
-    final double boxHeight = screenHeight * (isExpanded[index] ? 0.3 : 0.13);
+    final double boxHeight = screenHeight * (isExpanded[index] ? (ex(widget.exerciseName)?0.25:0.31 ): 0.11);
     final double boxWidth = screenWidth * 0.9; // Adjust the ratio as needed
 
     return ListView(
@@ -269,9 +292,10 @@ class _FeedbackState extends State<Feedbacks> {
           height: boxHeight,
           width: boxWidth,
           child: ExpandableBox(
-            title: exerciseFeedback[index],
+            exerciseName:widget.exerciseName,
+            title: ex(widget.exerciseName)?bicepexerciseFeedback[index]:lateralexerciseFeedback[index],
             isExpanded: isExpanded[index],
-            feedback: feedbackPoints.sublist(index * 3, index * 3 + 3),
+            feedback: ex(widget.exerciseName)? bicepfeedbackPoints.sublist(index * 3, index * 3 + 3):lateralfeedbackpoints.sublist(index * 3, index * 3 + 3),
             onToggle: () => setState(() {
               isExpanded[index] = !isExpanded[index];
             }),
