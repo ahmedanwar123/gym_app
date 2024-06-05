@@ -176,7 +176,7 @@ class _FeedbackState extends State<Feedbacks> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CF1(Workoutlevel: widget.Workoutlevel, exerciseName: widget.exerciseName,)));
+                              builder: (context) => CyclesFeedback()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: buttonColor,
