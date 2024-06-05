@@ -4,8 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
-final ip ='http://192.186.173.139:3000/video-processing';
-
+final ip ='http://localhost:3000/video-processing';
 // Function to request camera permission and record a video
 Future<String?> recordVideo(BuildContext context,
     {required String exerciseName}) async {

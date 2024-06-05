@@ -26,14 +26,39 @@ class _FeedbackState extends State<Feedbacks> {
   late int x = 0;
   late int y = 0;
 
-  final List<String> exerciseFeedback = [
+  final List<String> bicepexerciseFeedback = [
+    'Tips for Form & Technique',
+    'Tips for Stability',
+    'Tips for Motion & Control'
+  ];
+  final List<String> lateralexerciseFeedback = [
     'Tips for Form & Technique',
     'Tips for Stability',
     'Tips for Motion & Control'
   ];
 
+  bool ex( String exerciseName) {
+    bool ex;
 
-  final List<String> feedbackPoints = [
+    if ( exerciseName == 'bicep') {
+      ex = true;
+    } else  {
+      ex = false;
+    }
+    return ex;
+  }
+  final List<String> bicepfeedbackPoints = [
+    'Ensure an upright posture',
+    'Elbows should be close to your torso',
+    'Elbows shouldn\'t be far way',
+    'Minimize the swinging',
+    'Shoulders should remain stable throughout the exercise',
+    'Stand Still while lifting the dumbells ',
+    'The dumbbells should be lifted with a full range of motion',
+    'Avoid Hyperextension of your elbow joint',
+    'Avoid rapid motions',
+  ];
+  final List<String> lateralfeedbackpoints = [
     'Ensure an upright posture',
     'Elbows should be close to your torso',
     'Elbows shouldn\'t be far way',
@@ -255,7 +280,7 @@ class _FeedbackState extends State<Feedbacks> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     // Calculate the box height and width based on screen dimensions and desired ratio
-    final double boxHeight = screenHeight * (isExpanded[index] ? 0.3 : 0.13);
+    final double boxHeight = screenHeight * (isExpanded[index] ? 0.23 : 0.11);
     final double boxWidth = screenWidth * 0.9; // Adjust the ratio as needed
 
     return ListView(
@@ -267,9 +292,9 @@ class _FeedbackState extends State<Feedbacks> {
           width: boxWidth,
           child: ExpandableBox(
             exerciseName:widget.exerciseName,
-            title: exerciseFeedback[index],
+            title: ex(widget.exerciseName)?bicepexerciseFeedback[index]:lateralexerciseFeedback[index],
             isExpanded: isExpanded[index],
-            feedback: feedbackPoints.sublist(index * 3, index * 3 + 3),
+            feedback: ex(widget.exerciseName)? bicepfeedbackPoints.sublist(index * 3, index * 3 + 3):lateralfeedbackpoints.sublist(index * 3, index * 3 + 3),
             onToggle: () => setState(() {
               isExpanded[index] = !isExpanded[index];
             }),

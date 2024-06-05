@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true),
-      home: Onboarding_3(), //change this to your page class to test
+      home: Splash(), //change this to your page class to test
 
     );
   }
