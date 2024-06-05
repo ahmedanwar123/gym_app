@@ -165,6 +165,8 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                           imagePath:
                               'assets/images/WorkoutCategories_BicepsCurl.png',
                           exerciseName: 'bicep',
+                          Workoutlevel: Workoutlevel,
+
                         ),
                       ),
                     );
@@ -183,6 +185,7 @@ class _WorkoutCategoriesState extends State<WorkoutCategories> {
                         builder: (context) => ExercisePopup(
                           imagePath: 'assets/images/LateralRaise.jpg',
                           exerciseName: 'lateral_raise',
+                          Workoutlevel: Workoutlevel,
                         ),
                       ),
                     );

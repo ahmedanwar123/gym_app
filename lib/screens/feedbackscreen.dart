@@ -1,24 +1,23 @@
 import 'dart:io';
+import 'package:app/screens/workout_categories_page.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../shared/theme.dart';
 import '../widgets/expandableBox_Widget.dart';
-import 'workout_categories_page.dart';
-import 'cyclesFeedback.dart';
 import 'cf1.dart';
+import 'cyclesFeedback.dart';
 
-class Feedbacks extends StatefulWidget {
-
-  const Feedbacks({Key? key, required this.Workoutlevel,required this.videoURL, required this.exerciseName}) : super(key: key);
+class Feedbackscreen extends StatefulWidget {
+  const Feedbackscreen({Key? key, required this.videoURL, required this.Workoutlevel, required this.exerciseName}) : super(key: key);
   final String videoURL;
   final String Workoutlevel;
   final String exerciseName;
 
   @override
-  State<Feedbacks> createState() => _FeedbackState();
+  State<Feedbackscreen> createState() => _FeedbackscreenState();
 }
 
-class _FeedbackState extends State<Feedbacks> {
+class _FeedbackscreenState extends State<Feedbackscreen> {
   late VideoPlayerController _controller;
   double _volumeLevel = 1.0;
   double videoContainerRatio = 0.5;
@@ -31,7 +30,6 @@ class _FeedbackState extends State<Feedbacks> {
     'Tips for Stability',
     'Tips for Motion & Control'
   ];
-
 
   final List<String> feedbackPoints = [
     'Ensure an upright posture',
@@ -60,21 +58,15 @@ class _FeedbackState extends State<Feedbacks> {
 
   void _initVideoPlayer() async {
     try {
-      if (File(widget.videoURL).existsSync()) {
-        _controller = VideoPlayerController.file(File(widget.videoURL));
-        await _controller.initialize();
-        setState(() {});
-        _controller.setLooping(true);
-      } else {
-        // Handle case where video file doesn't exist
-        print("Video file doesn't exist.");
-      }
+      _controller = VideoPlayerController.file(File(widget.videoURL));
+      await _controller.initialize();
+      setState(() {});
+      _controller.setLooping(true);
     } catch (error) {
       print("Error initializing video player: $error");
       // Handle error appropriately (e.g., show error message to user)
     }
   }
-
 
   void _togglePlayPause() {
     setState(() {
@@ -118,8 +110,7 @@ class _FeedbackState extends State<Feedbacks> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight:
-                MediaQuery.of(context).size.height * videoContainerRatio,
+            expandedHeight: MediaQuery.of(context).size.height * videoContainerRatio,
             flexibleSpace: FlexibleSpaceBar(
               background: AspectRatio(
                 aspectRatio: _controller.value.aspectRatio * getScale(),
@@ -148,9 +139,11 @@ class _FeedbackState extends State<Feedbacks> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CF1(Workoutlevel: widget.Workoutlevel, exerciseName: widget.exerciseName,)));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CF1(Workoutlevel: widget.Workoutlevel, exerciseName: widget.exerciseName),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: buttonColor,
@@ -170,9 +163,11 @@ class _FeedbackState extends State<Feedbacks> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WorkoutCategories()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WorkoutCategories(),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: buttonColor,
@@ -253,11 +248,9 @@ class _FeedbackState extends State<Feedbacks> {
   Widget _buildExpandableBox(int index) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
     // Calculate the box height and width based on screen dimensions and desired ratio
     final double boxHeight = screenHeight * (isExpanded[index] ? 0.3 : 0.13);
     final double boxWidth = screenWidth * 0.9; // Adjust the ratio as needed
-
     return ListView(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -266,17 +259,15 @@ class _FeedbackState extends State<Feedbacks> {
           height: boxHeight,
           width: boxWidth,
           child: ExpandableBox(
-            exerciseName:widget.exerciseName,
+            exerciseName: widget.exerciseName,
             title: exerciseFeedback[index],
             isExpanded: isExpanded[index],
             feedback: feedbackPoints.sublist(index * 3, index * 3 + 3),
             onToggle: () => setState(() {
               isExpanded[index] = !isExpanded[index];
             }),
-            frontGifPath:
-                'assets/gifs/${index + 1}front.gif', // Example path for front GIF
-            sideGifPath:
-                'assets/gifs/${index + 1}side.gif', // Example path for side GIF
+            frontGifPath: 'assets/gifs/${index + 1}front.gif', // Example path for front GIF
+            sideGifPath: 'assets/gifs/${index + 1}side.gif', // Example path for side GIF
           ),
         ),
       ],
@@ -285,8 +276,6 @@ class _FeedbackState extends State<Feedbacks> {
 
   double getScale() {
     double videoRatio = _controller.value.aspectRatio;
-    return videoRatio < videoContainerRatio
-        ? videoContainerRatio / videoRatio
-        : videoRatio / videoContainerRatio;
+    return videoRatio < videoContainerRatio ? videoContainerRatio / videoRatio : videoRatio / videoContainerRatio;
   }
 }

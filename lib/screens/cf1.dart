@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
 import 'package:app/shared/theme.dart';
 
 // Define a class to represent the feedback structure
@@ -18,14 +18,15 @@ class FeedbackItem {
   }
 }
 
-class CyclesFeedback extends StatefulWidget {
-  const CyclesFeedback({Key? key}) : super(key: key);
-
+class CF1 extends StatefulWidget {
+  const CF1({Key? key,required this.Workoutlevel, required this.exerciseName}) : super(key: key);
+  final String Workoutlevel;
+  final String exerciseName;
   @override
-  State<CyclesFeedback> createState() => _CyclesFeedbackState();
+  State<CF1> createState() => _CyclesFeedbackState();
 }
 
-class _CyclesFeedbackState extends State<CyclesFeedback> {
+class _CyclesFeedbackState extends State<CF1> {
   late List<FeedbackItem> feedbackItems = []; // Initialize with an empty list
 
   @override
@@ -34,22 +35,37 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
     _loadFeedbackData();
   }
 
+   String _file(String Workoutlevel, String exerciseName) {
+    String feedbackfile = '';
+
+    if (Workoutlevel == 'Beginner' && exerciseName == 'bicep') {
+      feedbackfile = 'assets/txt/222.txt';
+    } else if (Workoutlevel == 'Intermediate' && exerciseName == 'bicep') {
+      feedbackfile = 'assets/txt/02132.txt';
+    } else if (Workoutlevel == 'Advanced' && exerciseName == 'bicep') {
+      feedbackfile = 'assets/txt/333333.txt';
+    } else if (Workoutlevel == 'Beginner' && exerciseName == 'lateral_raise') {
+      feedbackfile = 'assets/txt/111222.txt';
+    } else if (Workoutlevel == 'Intermediate' && exerciseName == 'lateral_raise') {
+      feedbackfile = 'assets/txt/3210.txt';
+    } else if (Workoutlevel == 'Advanced' && exerciseName == 'lateral_raise') {
+      feedbackfile = 'assets/txt/00000000.txt';
+    }
+    return feedbackfile;
+  }
+
+
   Future<void> _loadFeedbackData() async {
     try {
-      // Make an HTTP GET request to fetch data from the server
-      var response = await http.get(Uri.parse('http://192.168.110.52:3000/video-processing'));
+      // Read data from the file
+      String data = await rootBundle.loadString(_file(widget.Workoutlevel, widget.exerciseName));
 
-      // Check if the request was successful (status code 200)
-      if (response.statusCode == 200) {
-        // Decode the JSON response
-        List<dynamic> jsonData = json.decode(response.body);
-        feedbackItems = jsonData.map((item) => FeedbackItem.fromJson(item)).toList();
+      // Parse the JSON data
+      List<dynamic> jsonData = json.decode(data);
+      feedbackItems =
+          jsonData.map((item) => FeedbackItem.fromJson(item)).toList();
 
-        setState(() {}); // Update the UI after loading data
-      } else {
-        // If the server returned an error response, print the error status code
-        print('Failed to load feedback data: ${response.statusCode}');
-      }
+      setState(() {}); // Update the UI after loading data
     } catch (error) {
       // If an error occurs during the request, print the error message
       print('Error loading feedback data: $error');
@@ -88,15 +104,15 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
                 // Determine the overall feedback message
                 String overallFeedback =
                     'Wrong cycle'; // Default message
-                  if (criteriaMet == 3) {
-                    overallFeedback = 'Wrong cycle';
-                  } else if (criteriaMet == 2) {
-                    overallFeedback = 'Almost Correct cycle';
-                  } else if (criteriaMet == 1) {
-                    overallFeedback = 'Cycle needs improvement';
-                  } else {
-                    overallFeedback = 'Correct cycle';
-                  }
+                if (criteriaMet == 0) {
+                  overallFeedback = 'Wrong cycle';
+                } else if (criteriaMet == 2) {
+                  overallFeedback = 'Almost Correct cycle';
+                } else if (criteriaMet == 1) {
+                  overallFeedback = 'Cycle needs improvement';
+                } else {
+                  overallFeedback = 'Correct cycle';
+                }
                 return Container(
                   margin: EdgeInsets.all(8),
                   padding: EdgeInsets.all(8),
