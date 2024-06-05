@@ -175,7 +175,7 @@ class ExercisePopup extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        Feedbackscreen(videoURL: uploadedVideoURL,Workoutlevel:Workoutlevel, exerciseName: exerciseName,),
+                                        Feedbacks(videoURL: uploadedVideoURL,Workoutlevel:Workoutlevel, exerciseName: exerciseName,),
                                   ),
                                 );
                               }
