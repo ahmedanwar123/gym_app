@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:app/widgets/videos.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:app/shared/theme.dart';
@@ -8,20 +7,28 @@ import 'package:app/shared/theme.dart';
 class FeedbackItem {
   final String cycle;
   final Map<String, int> feedback;
+  final List<String> video;
 
-  FeedbackItem({required this.cycle, required this.feedback});
+  FeedbackItem({
+    required this.cycle,
+    required this.feedback,
+    required this.video,
+  });
 
   factory FeedbackItem.fromJson(Map<String, dynamic> json) {
     return FeedbackItem(
       cycle: json['cycle'],
       feedback: Map<String, int>.from(json['feedback']),
+      video: List<String>.from(json['video']),
     );
   }
 }
 
 class CyclesFeedback extends StatefulWidget {
   const CyclesFeedback({Key? key}) : super(key: key);
-  final ip ='http://localhost:3000/video-processing';// change the ip address
+
+  final String ip = 'http://localhost:3000/video-processing'; // Change the IP address if needed
+
   @override
   State<CyclesFeedback> createState() => _CyclesFeedbackState();
 }
@@ -37,10 +44,10 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
 
   Future<void> _loadFeedbackData() async {
     try {
-      var response = await http.get(Uri.parse(ip));
+      var response = await http.get(Uri.parse(widget.ip));
 
       if (response.statusCode == 200) {
-        List<dynamic> jsonData = json.decode(response.body);
+        List<dynamic> jsonData = json.decode(response.body)['new_res'];
         feedbackItems = jsonData.map((item) => FeedbackItem.fromJson(item)).toList();
         setState(() {}); // Update the UI after loading data
       } else {
@@ -113,15 +120,15 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'Form & Technique: ${feedbackItem.feedback['Form & Technique'] == 1 ? "Met" : "Unmet"}',
+                        'Form & Technique: ${feedbackItem.feedback['Criteria 1'] == 1 ? "Met" : "Unmet"}',
                         style: TextStyle(color: textColor, fontSize: 16),
                       ),
                       Text(
-                        'Stability: ${feedbackItem.feedback['Stability'] == 1 ? "Met" : "Unmet"}',
+                        'Stability: ${feedbackItem.feedback['Criteria 2'] == 1 ? "Met" : "Unmet"}',
                         style: TextStyle(color: textColor, fontSize: 16),
                       ),
                       Text(
-                        'Motion & Control: ${feedbackItem.feedback['Motion & Control'] == 1 ? "Met" : "Unmet"}',
+                        'Motion & Control: ${feedbackItem.feedback['Criteria 3'] == 1 ? "Met" : "Unmet"}',
                         style: TextStyle(color: textColor, fontSize: 16),
                       ),
                       SizedBox(height: 8),
@@ -138,6 +145,23 @@ class _CyclesFeedbackState extends State<CyclesFeedback> {
                             ),
                           ],
                         ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        'Videos:',
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Column(
+                        children: feedbackItem.video.map((video) {
+                          return Text(
+                            video,
+                            style: TextStyle(color: textColor, fontSize: 12),
+                          );
+                        }).toList(),
                       ),
                     ],
                   ),

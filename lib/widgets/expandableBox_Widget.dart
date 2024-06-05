@@ -60,7 +60,7 @@ class _ExpandableBoxState extends State<ExpandableBox> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset(
-                    image(widget.exerciseName) ? widget.frontGifPath : widget.sideGifPath,
+                    !image(widget.exerciseName) ? widget.frontGifPath : widget.sideGifPath,
                     height: 200,
                   ),
                 ],
@@ -108,35 +108,41 @@ class _ExpandableBoxState extends State<ExpandableBox> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.title,
-                  style: const TextStyle(
-                    color: iconColor, // Set text color to white
-                    fontSize: 20, // Set font size
-                    fontWeight: FontWeight.bold, // Make the text bold
-                  ),
+          Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                widget.title,
+                style: const TextStyle(
+                  color: SectextColor, // Set text color to white
+                  fontSize: 16, // Set font size
+                  fontWeight: FontWeight.bold, // Make the text bold
                 ),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        widget.isExpanded ? Icons.expand_less : Icons.expand_more,
-                        color: iconColor,
-                      ),
-                      onPressed: widget.onToggle,
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.gif,color: iconColor,size: 35,), // Change to the desired icon
-                      onPressed: _showGifDialog, // Call the method to show the AlertDialog
-                    ),
-                  ],
+                overflow: TextOverflow.ellipsis, // Adds ellipsis if text overflows
+                maxLines: 1, // Restricts text to a single line
+                softWrap: false, // Prevents text from wrapping to the next line
+              ),
+            ),
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    widget.isExpanded ? Icons.expand_less : Icons.expand_more,
+                    color: iconColor,
+                  ),
+                  onPressed: widget.onToggle,
+                ),
+                IconButton(
+                  icon: Icon(Icons.gif, color: iconColor, size: 33), // Change to the desired icon
+                  onPressed: _showGifDialog, // Call the method to show the AlertDialog
                 ),
               ],
             ),
-            SizedBox(height: 4), // Add space between title and feedback
+          ],
+        ),
+          SizedBox(height: 4), // Add space between title and feedback
             if (widget.isExpanded)
               Container(
                 color: widget.feedbackBackgroundColor, // Set feedback background color

@@ -27,14 +27,14 @@ class _FeedbackState extends State<Feedbacks> {
   late int y = 0;
 
   final List<String> bicepexerciseFeedback = [
-    'Tips for Form & Technique',
-    'Tips for Stability',
-    'Tips for Motion & Control'
+    'Tips for bicep Form & Technique',
+    'Tips for bicep Stability',
+    'Tips for bicep Motion & Control'
   ];
   final List<String> lateralexerciseFeedback = [
-    'Tips for Form & Technique',
-    'Tips for Stability',
-    'Tips for Motion & Control'
+    'Tips for lateral raise Form & Technique',
+    'Tips for lateral raise Stability',
+    'Tips for lateral raise Motion & Control'
   ];
 
   bool ex( String exerciseName) {
@@ -48,27 +48,28 @@ class _FeedbackState extends State<Feedbacks> {
     return ex;
   }
   final List<String> bicepfeedbackPoints = [
-    'Ensure an upright posture',
-    'Elbows should be close to your torso',
-    'Elbows shouldn\'t be far way',
-    'Minimize the swinging',
-    'Shoulders should remain stable throughout the exercise',
-    'Stand Still while lifting the dumbells ',
-    'The dumbbells should be lifted with a full range of motion',
-    'Avoid Hyperextension of your elbow joint',
-    'Avoid rapid motions',
+    '- Ensure an upright posture',
+    '- Elbows should be close to your torso',
+    '- Elbows shouldn\'t be far way',
+    '- Minimize the swinging',
+    '-Shoulders should remain stable throughout the exercise',
+    '-Stand Still while lifting the dumbells ',
+    '-The dumbbells should be lifted with a full range of motion',
+    '-Avoid Hyperextension of your elbow joint',
+    '-Avoid rapid motions',
   ];
   final List<String> lateralfeedbackpoints = [
-    'Ensure an upright posture',
-    'Elbows should be close to your torso',
-    'Elbows shouldn\'t be far way',
-    'Minimize the swinging',
-    'Shoulders should remain stable throughout the exercise',
-    'Stand Still while lifting the dumbells ',
-    'The dumbbells should be lifted with a full range of motion',
-    'Avoid Hyperextension of your elbow joint',
-    'Avoid rapid motions',
+    'Ensure maintaining an upright posture with shoulders back and chest up.',
+    'Ensure raising the dumbbells directly to your sides, keeping your arms straight or slightly bent at elbows.',
+    'Ensure holding dumbbells with a natural grip with palms facing the thighs.',
+    'Ensure minimizing swinging while lifting the dumbbells.',
+    'Ensure shoulders should remain stable throughout the exercise.',
+    'Ensure stand still while lifting the dumbbells.',
+    'Ensure raising the dumbbells until parallel to the ground or slightly below shoulder height.',
+    'Ensure controlling the movement tempo and avoiding rapid motions.',
+    'Ensure avoiding hyperextension of elbow joints & excessive elevation or protraction of shoulder blades.',
   ];
+
 
   @override
   void initState() {
@@ -280,7 +281,7 @@ class _FeedbackState extends State<Feedbacks> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     // Calculate the box height and width based on screen dimensions and desired ratio
-    final double boxHeight = screenHeight * (isExpanded[index] ? 0.23 : 0.11);
+    final double boxHeight = screenHeight * (isExpanded[index] ? (ex(widget.exerciseName)?0.25:0.31 ): 0.11);
     final double boxWidth = screenWidth * 0.9; // Adjust the ratio as needed
 
     return ListView(
