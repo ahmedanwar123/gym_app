@@ -55,14 +55,6 @@ To get started with PBL App, follow these simple steps:
 
 Contributions are welcome! If you have ideas for improvements, new features, or bug fixes, feel free to open an issue or submit a pull request.
 
-## License
-
-This project is licensed under License - see the [LICENSE](https://github.com/ahmedanwar123/pbl-app/blob/main/LICENSE) file for details.
-
-## Acknowledgments
-
-Special thanks to the contributors who helped make this project possible.
-
 ## Contact
 
 For any inquiries or feedback, please contact [Ahmed Anwar](mailto:ahmed.anwar2003@gmail.com).
